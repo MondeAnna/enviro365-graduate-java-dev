@@ -6,17 +6,43 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table( name = "wastes" )
-public record Waste(
+public class Waste {
 
-        @NotBlank String substance,
-        @Id @NotBlank String formula,
-        @PositiveOrZero double totalConcentrationThresholdZero,
-        @PositiveOrZero double totalConcentrationThresholdOne,
-        @PositiveOrZero double totalConcentrationThresholdTwo,
-        @PositiveOrZero double leachableConcentrationThresholdZero,
-        @PositiveOrZero double leachableConcentrationThresholdOne,
-        @PositiveOrZero double leachableConcentrationThresholdTwo,
-        @PositiveOrZero double leachableConcentrationThresholdThree ){
+        @NotBlank
+        private String substance;
+
+        @Id @NotBlank
+        private String formula;
+
+        @PositiveOrZero
+        private double totalConcentrationThresholdZero;
+
+        @PositiveOrZero
+        private double totalConcentrationThresholdOne;
+
+        @PositiveOrZero
+        private double totalConcentrationThresholdTwo;
+
+        @PositiveOrZero
+        private double leachableConcentrationThresholdZero;
+
+        @PositiveOrZero
+        private double leachableConcentrationThresholdOne;
+
+        @PositiveOrZero
+        private double leachableConcentrationThresholdTwo;
+
+        @PositiveOrZero
+        private double leachableConcentrationThresholdThree;
 }

@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Set;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping( path = "/api/v1/wastes" )
@@ -23,12 +24,12 @@ public class WasteController {
     }
 
     @GetMapping
-    public Set<Waste> findAll() {
+    public List<Waste> findAll() {
         return repository.findAll();
     }
 
     @GetMapping( path = "/{formula}" )
-    public Waste findById( @PathVariable String formula ){
+    public Optional<Waste> findById(@PathVariable String formula ){
         return repository.findById( formula );
     }
 }

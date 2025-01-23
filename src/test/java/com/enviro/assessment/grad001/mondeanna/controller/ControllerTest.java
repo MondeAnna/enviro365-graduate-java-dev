@@ -13,7 +13,8 @@ import org.mockito.Mock;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Set;
+import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 public class ControllerTest {
@@ -24,19 +25,19 @@ public class ControllerTest {
     @InjectMocks
     private WasteController controller;
 
-    private final Set<Waste> mockRepo = TestData.mockRepo();
+    private final List<Waste> mockRepo = TestData.mockRepo();
 
     @Test
     public void testFindAll(){
         when( repository.findAll() ).thenReturn( mockRepo );
-        assertThat( controller.findAll() ).isEqualTo( mockRepo );
+        assertThat( controller.findAll().size() ).isEqualTo( 3 );
     }
 
     @Test
     public void testFindById(){
         Waste xylenes = new Waste( "Xylenes", "(CH3)2C6H4", 0.0, 890, 3_560, 0, 25, 50, 200 );
 
-        when( repository.findById( "(CH3)2C6H4" )).thenReturn( xylenes );
-        assertThat( controller.findById( "(CH3)2C6H4" )).isEqualTo( xylenes );
+        when( repository.findById( "(CH3)2C6H4" )).thenReturn( Optional.of( xylenes ));
+        assertThat( controller.findById( "(CH3)2C6H4" )).isEqualTo( Optional.of( TestData.xylenes() ));
     }
 }

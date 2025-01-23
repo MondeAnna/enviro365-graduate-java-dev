@@ -1,5 +1,7 @@
 package com.enviro.assessment.grad001.mondeanna.model;
 
+import com.enviro.assessment.grad001.mondeanna.TestData;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import org.junit.jupiter.api.Test;
@@ -10,18 +12,18 @@ public class WasteTest {
 
     @Test
     void testInstanceConstruction(){
-        Waste zinc = new Waste( "Zinc", "Zn", 240, 160_000, 640_000, 5, 250, 500, 2_000 );
+        Waste zinc = TestData.zinc();
 
-        assertThat( zinc.substance() ).isEqualTo( "Zinc" );
-        assertThat( zinc.formula() ).isEqualTo( "Zn" );
+        assertThat( zinc.getSubstance() ).isEqualTo( "Zinc" );
+        assertThat( zinc.getFormula() ).isEqualTo( "Zn" );
 
-        assertThat( zinc.totalConcentrationThresholdZero() ).isEqualTo( 240 );
-        assertThat( zinc.totalConcentrationThresholdOne() ).isEqualTo( 160_000 );
-        assertThat( zinc.totalConcentrationThresholdTwo() ).isEqualTo( 640_000 );
+        assertThat( zinc.getTotalConcentrationThresholdZero() ).isEqualTo( 240 );
+        assertThat( zinc.getTotalConcentrationThresholdOne() ).isEqualTo( 160_000 );
+        assertThat( zinc.getTotalConcentrationThresholdTwo() ).isEqualTo( 640_000 );
 
-        assertThat( zinc.leachableConcentrationThresholdZero() ).isEqualTo( 5 );
-        assertThat( zinc.leachableConcentrationThresholdOne() ).isEqualTo( 250 );
-        assertThat( zinc.leachableConcentrationThresholdTwo() ).isEqualTo( 500 );
-        assertThat( zinc.leachableConcentrationThresholdThree() ).isEqualTo( 2_000 );
+        assertThat( zinc.getLeachableConcentrationThresholdZero() ).isEqualTo( 5 );
+        assertThat( zinc.getLeachableConcentrationThresholdOne() ).isEqualTo( 250 );
+        assertThat( zinc.getLeachableConcentrationThresholdTwo() ).isEqualTo( 500 );
+        assertThat( zinc.getLeachableConcentrationThresholdThree() ).isEqualTo( 2_000 );
     }
 }
