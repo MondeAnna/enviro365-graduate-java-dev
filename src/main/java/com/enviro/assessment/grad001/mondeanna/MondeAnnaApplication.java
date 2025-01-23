@@ -9,5 +9,4 @@ public class MondeAnnaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MondeAnnaApplication.class, args);
 	}
-
 }

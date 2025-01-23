@@ -1,13 +1,19 @@
 package com.enviro.assessment.grad001.mondeanna.repository;
 
 import com.enviro.assessment.grad001.mondeanna.model.Waste;
+
 import org.springframework.stereotype.Repository;
+
 import java.util.Set;
 
 @Repository
 public class WasteRepository {
 
     private final Set<Waste> repository = createRepository();
+
+    public Set<Waste> findAll() {
+        return repository;
+    }
 
     private Set<Waste> createRepository(){
         return Set.of(
@@ -48,6 +54,6 @@ public class WasteRepository {
             new Waste( "2,4-Dichlorophenoxyacetic", "C8H6Cl2O3", 0.05, 120, 480, 0, 1.5, 3, 3 ),
             new Waste( "Chlordane", "C10H6Cl8", 0.05, 4, 16, 0, 0.05, 0.1, 0.1 ),
             new Waste( "Heptachlor", "C10H5Cl7", 0.05, 1.2, 4.8, 0, 0.015, 0.03, 0.03 )
-    );
+        );
     }
 }
