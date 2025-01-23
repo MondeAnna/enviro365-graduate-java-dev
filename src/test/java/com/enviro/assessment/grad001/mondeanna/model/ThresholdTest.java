@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class WasteTest {
+public class ThresholdTest {
 
     @Test
     void testInstanceConstruction(){
-        Waste zinc = TestData.zinc();
+        Threshold zinc = TestData.zinc();
 
         assertThat( zinc.getSubstance() ).isEqualTo( "Zinc" );
         assertThat( zinc.getFormula() ).isEqualTo( "Zn" );

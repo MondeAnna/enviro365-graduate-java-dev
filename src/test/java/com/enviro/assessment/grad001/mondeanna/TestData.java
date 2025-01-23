@@ -1,13 +1,14 @@
 package com.enviro.assessment.grad001.mondeanna;
 
-import com.enviro.assessment.grad001.mondeanna.model.Waste;
+import com.enviro.assessment.grad001.mondeanna.model.Threshold;
 
 import java.util.List;
 
 public class TestData {
 
-    public static Waste zinc(){
-        return Waste.builder()
+    public static Threshold zinc(){
+        return Threshold.builder()
+                .id( 1L )
                 .substance( "Zinc" )
                 .formula( "Zn" )
                 .totalConcentrationThresholdZero( 240 )
@@ -19,8 +20,9 @@ public class TestData {
                 .leachableConcentrationThresholdThree( 2_000 )
                 .build();
     }
-    public static Waste xylenes(){
-        return Waste.builder()
+    public static Threshold xylenes(){
+        return Threshold.builder()
+                .id( 10L )
                 .substance( "Xylenes" )
                 .formula( "(CH3)2C6H4" )
                 .totalConcentrationThresholdZero( 0.0 )
@@ -33,8 +35,9 @@ public class TestData {
                 .build();
     }
 
-    public static Waste heptachlor(){
-        return Waste.builder()
+    public static Threshold heptachlor(){
+        return Threshold.builder()
+                .id( 100L )
                 .substance( "Heptachlor" )
                 .formula( "C10H5Cl7" )
                 .totalConcentrationThresholdZero( 0.05 )
@@ -47,7 +50,7 @@ public class TestData {
                 .build();
     }
 
-    public static List<Waste> mockRepo(){
+    public static List<Threshold> mockRepo(){
         return List.of( zinc(), xylenes(), heptachlor() );
     }
 }

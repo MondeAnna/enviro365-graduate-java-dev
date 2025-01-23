@@ -1,8 +1,6 @@
 package com.enviro.assessment.grad001.mondeanna.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 
@@ -16,13 +14,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table( name = "wastes" )
-public class Waste {
+@Table( name = "thresholds" )
+public class Threshold {
+
+        @Id
+        @GeneratedValue( strategy = GenerationType.IDENTITY )
+        private Long id;
 
         @NotBlank
         private String substance;
 
-        @Id @NotBlank
+        @NotBlank
         private String formula;
 
         @PositiveOrZero

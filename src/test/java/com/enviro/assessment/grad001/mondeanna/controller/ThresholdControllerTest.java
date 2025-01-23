@@ -1,8 +1,8 @@
 package com.enviro.assessment.grad001.mondeanna.controller;
 
 import com.enviro.assessment.grad001.mondeanna.TestData;
-import com.enviro.assessment.grad001.mondeanna.model.Waste;
-import com.enviro.assessment.grad001.mondeanna.repository.WasteRepository;
+import com.enviro.assessment.grad001.mondeanna.model.Threshold;
+import com.enviro.assessment.grad001.mondeanna.repository.ThresholdRepository;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
@@ -17,15 +17,15 @@ import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
-public class ControllerTest {
+public class ThresholdControllerTest {
 
     @Mock
-    private WasteRepository repository;
+    private ThresholdRepository repository;
 
     @InjectMocks
-    private WasteController controller;
+    private ThresholdController controller;
 
-    private final List<Waste> mockRepo = TestData.mockRepo();
+    private final List<Threshold> mockRepo = TestData.mockRepo();
 
     @Test
     public void testFindAll(){
@@ -35,9 +35,9 @@ public class ControllerTest {
 
     @Test
     public void testFindById(){
-        Waste xylenes = new Waste( "Xylenes", "(CH3)2C6H4", 0.0, 890, 3_560, 0, 25, 50, 200 );
+        Threshold xylenes = TestData.xylenes();
 
-        when( repository.findById( "(CH3)2C6H4" )).thenReturn( Optional.of( xylenes ));
-        assertThat( controller.findById( "(CH3)2C6H4" )).isEqualTo( Optional.of( TestData.xylenes() ));
+        when( repository.findById( xylenes.getId() )).thenReturn( Optional.of( xylenes ));
+        assertThat( controller.findById(xylenes.getId() )).isEqualTo( Optional.of( xylenes ));
     }
 }

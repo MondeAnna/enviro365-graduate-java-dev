@@ -1,7 +1,7 @@
 package com.enviro.assessment.grad001.mondeanna.controller;
 
-import com.enviro.assessment.grad001.mondeanna.model.Waste;
-import com.enviro.assessment.grad001.mondeanna.repository.WasteRepository;
+import com.enviro.assessment.grad001.mondeanna.model.Threshold;
+import com.enviro.assessment.grad001.mondeanna.repository.ThresholdRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,23 +13,23 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping( path = "/api/v1/wastes" )
-public class WasteController {
+@RequestMapping( path = "/api/v1/thresholds" )
+public class ThresholdController {
 
-    private final WasteRepository repository;
+    private final ThresholdRepository repository;
 
     @Autowired
-    public WasteController( WasteRepository repository ){
+    public ThresholdController(ThresholdRepository repository ){
         this.repository = repository;
     }
 
     @GetMapping( path = "/" )
-    public List<Waste> findAll() {
+    public List<Threshold> findAll() {
         return repository.findAll();
     }
 
-    @GetMapping( path = "/{formula}" )
-    public Optional<Waste> findById(@PathVariable String formula ){
-        return repository.findById( formula );
+    @GetMapping( path = "/{id}" )
+    public Optional<Threshold> findById(@PathVariable long id ){
+        return repository.findById( id );
     }
 }
