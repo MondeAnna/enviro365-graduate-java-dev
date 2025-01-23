@@ -25,7 +25,7 @@ public class ThresholdControllerTest {
     @InjectMocks
     private ThresholdController controller;
 
-    private final List<Threshold> mockRepo = TestData.mockRepo();
+    private final List<Threshold> mockRepo = TestData.mockThresholdRepo();
 
     @Test
     public void testFindAll(){

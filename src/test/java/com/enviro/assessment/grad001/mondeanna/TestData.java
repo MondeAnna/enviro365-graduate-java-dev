@@ -7,6 +7,17 @@ import java.util.List;
 
 public class TestData {
 
+    public static Category typeTwo(){
+        return Category.builder()
+                .id( 2L )
+                .name( "Type2" )
+                .description("""
+                        leachable concentration between 1 and 2 as well as \
+                        total concentration less that level 1 is type 2
+                        """ )
+                .build();
+    }
+
     public static Category typeTwenty(){
         return Category.builder()
                 .id( 20L )
@@ -16,6 +27,10 @@ public class TestData {
                         concentration above level waste type 20
                         """ )
                 .build();
+    }
+
+    public static List<Category> mockCategoryRepo(){
+        return List.of( typeTwo(), typeTwenty() );
     }
 
     public static Threshold zinc(){
@@ -62,7 +77,7 @@ public class TestData {
                 .build();
     }
 
-    public static List<Threshold> mockRepo(){
+    public static List<Threshold> mockThresholdRepo(){
         return List.of( zinc(), xylenes(), heptachlor() );
     }
 }
