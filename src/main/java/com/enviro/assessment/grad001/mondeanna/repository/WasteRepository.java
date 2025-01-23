@@ -5,8 +5,6 @@ import com.enviro.assessment.grad001.mondeanna.model.Waste;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Set;
-
 @Repository
 public interface WasteRepository extends JpaRepository<Waste, String> {
 

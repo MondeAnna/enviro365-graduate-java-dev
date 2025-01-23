@@ -23,7 +23,7 @@ public class WasteController {
         this.repository = repository;
     }
 
-    @GetMapping
+    @GetMapping( path = "/" )
     public List<Waste> findAll() {
         return repository.findAll();
     }
