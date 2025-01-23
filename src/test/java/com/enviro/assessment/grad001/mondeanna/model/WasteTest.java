@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class WasteTest {
 
     @Test
-    void testInstanceConstruction() {
+    void testInstanceConstruction(){
         Waste zinc = new Waste( "Zinc", "Zn", 240, 160_000, 640_000, 5, 250, 500, 2_000 );
 
         assertThat( zinc.substance() ).isEqualTo( "Zinc" );

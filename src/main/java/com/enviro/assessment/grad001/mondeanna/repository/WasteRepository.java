@@ -11,8 +11,15 @@ public class WasteRepository {
 
     private final Set<Waste> repository = createRepository();
 
-    public Set<Waste> findAll() {
+    public Set<Waste> findAll(){
         return repository;
+    }
+
+    public Waste findById( String formula ){
+        return findAll().stream()
+            .filter( waste -> waste.formula().equals( formula ))
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException( "Waste not found" ));
     }
 
     private Set<Waste> createRepository(){

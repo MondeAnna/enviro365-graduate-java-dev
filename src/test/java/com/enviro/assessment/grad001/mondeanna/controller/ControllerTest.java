@@ -27,8 +27,16 @@ public class ControllerTest {
     private final Set<Waste> mockRepo = TestData.mockRepo();
 
     @Test
-    public void testFindAll() {
+    public void testFindAll(){
         when( repository.findAll() ).thenReturn( mockRepo );
         assertThat( controller.findAll() ).isEqualTo( mockRepo );
+    }
+
+    @Test
+    public void testFindById(){
+        Waste xylenes = new Waste( "Xylenes", "(CH3)2C6H4", 0.0, 890, 3_560, 0, 25, 50, 200 );
+
+        when( repository.findById( "(CH3)2C6H4" )).thenReturn( xylenes );
+        assertThat( controller.findById( "(CH3)2C6H4" )).isEqualTo( xylenes );
     }
 }
