@@ -1,10 +1,22 @@
 package com.enviro.assessment.grad001.mondeanna;
 
+import com.enviro.assessment.grad001.mondeanna.model.Category;
 import com.enviro.assessment.grad001.mondeanna.model.Threshold;
 
 import java.util.List;
 
 public class TestData {
+
+    public static Category typeTwenty(){
+        return Category.builder()
+                .id( 20L )
+                .name( "Type20" )
+                .description("""
+                        wastes with element or chemical substances \
+                        concentration above level waste type 20
+                        """ )
+                .build();
+    }
 
     public static Threshold zinc(){
         return Threshold.builder()
