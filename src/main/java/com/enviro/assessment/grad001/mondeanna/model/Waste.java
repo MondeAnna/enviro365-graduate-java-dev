@@ -10,13 +10,13 @@ import jakarta.validation.constraints.PositiveOrZero;
 @Table( name = "wastes" )
 public record Waste(
 
-        @Id @NotBlank String formula,
         @NotBlank String substance,
-        @PositiveOrZero double totalLevelZero,
-        @PositiveOrZero double totalLevelOne,
-        @PositiveOrZero double totalLevelTwo,
-        @PositiveOrZero double leachableLevelZero,
-        @PositiveOrZero double leachableLevelOne,
-        @PositiveOrZero double leachableLevelTwo,
-        @PositiveOrZero double leachableLevelThree ){
+        @Id @NotBlank String formula,
+        @PositiveOrZero double totalConcentrationThresholdZero,
+        @PositiveOrZero double totalConcentrationThresholdOne,
+        @PositiveOrZero double totalConcentrationThresholdTwo,
+        @PositiveOrZero double leachableConcentrationThresholdZero,
+        @PositiveOrZero double leachableConcentrationThresholdOne,
+        @PositiveOrZero double leachableConcentrationThresholdTwo,
+        @PositiveOrZero double leachableConcentrationThresholdThree ){
 }
