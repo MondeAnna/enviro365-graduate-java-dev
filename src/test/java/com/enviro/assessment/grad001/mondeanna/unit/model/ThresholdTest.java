@@ -1,9 +1,10 @@
-package com.enviro.assessment.grad001.mondeanna.model;
+package com.enviro.assessment.grad001.mondeanna.unit.model;
 
 import com.enviro.assessment.grad001.mondeanna.TestData;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import com.enviro.assessment.grad001.mondeanna.model.Threshold;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

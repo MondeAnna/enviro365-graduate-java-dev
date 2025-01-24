@@ -1,10 +1,14 @@
-package com.enviro.assessment.grad001.mondeanna.model;
+package com.enviro.assessment.grad001.mondeanna.unit.model;
 
 import com.enviro.assessment.grad001.mondeanna.TestData;
+import com.enviro.assessment.grad001.mondeanna.model.Category;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+
+@SpringBootTest
 public class CategoryTest {
 
     @Test
