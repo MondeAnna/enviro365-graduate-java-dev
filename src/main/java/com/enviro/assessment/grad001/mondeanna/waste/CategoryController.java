@@ -41,9 +41,9 @@ public class CategoryController {
     }
 
     @PutMapping( path = "/{id}" )
-    public Category update( @Valid @PathVariable long id, @Valid @RequestBody Category category ){
+    public ResponseEntity<Category> update( @Valid @PathVariable long id, @Valid @RequestBody Category category ){
         category.setId( id );
-        return repository.save( category );
+        return ResponseEntity.ok( Optional.of( repository.save( category )).get() );
     }
 
     @DeleteMapping( path = "/{id}" )

@@ -60,14 +60,16 @@ public class CategoryControllerTest {
     }
 
     @Test
-    @Disabled
     public void testUpdate(){
         Category typeTwo = TestData.typeTwo();
-        Category typeFour = TestData.typeTwo();
-        typeFour.setId( 4L );
+        Category updated = TestData.typeTwo();
 
-        when( repository.save( typeTwo )).thenReturn( typeFour );
-        assertThat( controller.update( 4L, typeTwo )).isEqualTo( typeFour );
+        updated.setName( "updated name" );
+        updated.setDescription( "updated description" );
+
+        Mockito.when( repository.existsById( 2L )).thenReturn( true );
+        Mockito.when( repository.save( typeTwo )).thenReturn( updated );
+        assertThat( controller.update( 2L, typeTwo )).isEqualTo( ResponseEntity.ok( updated ));
     }
 
     @Test
