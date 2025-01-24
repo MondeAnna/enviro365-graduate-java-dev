@@ -83,3 +83,35 @@ VALUES
         ( 'Chlordane', 'C10H6Cl8', 0.05, 4, 16, 0.0, 0.05, 0.1, 0.1 ),
         ( 'Heptachlor', 'C10H5Cl7', 0.05, 1.2, 4.8, 0.0, 0.015, 0.03, 0.03 )
 ;
+
+INSERT INTO categories ( name, description )
+
+VALUES
+        ( 'Type 0', '(LC > LCT3 or TC > TCT2) | ' ||
+                    'where LCT3 is Leachable Concentration Threshold 3 ' ||
+                    'and TCT2 is Total Concentration Threshold 2 ' ||
+                    'are Type 0 Wastes'),
+        ( 'Type 1', '(LCT2 < LC <= LCT3 or TCT1 < TC <= TCT2) | ' ||
+                    'where LCT2 is Leachable Concentration Threshold 2 ' ||
+                    'and LCT3 is Leachable Concentration Threshold 3 ' ||
+                    'and LCT1 is Leachable Concentration Threshold 1 ' ||
+                    'and TCT2 is Total Concentration Threshold 2 ' ||
+                    'are Type 1 Wastes' ),
+        ( 'Type 2', '(LCT1 < LC <= LCT2 or TC <= TCT1) | ' ||
+                    'where LCT1 is Leachable Concentration Threshold 1 ' ||
+                    'and LCT2 is Leachable Concentration Threshold 2 ' ||
+                    'and TCT2 is Total Concentration Threshold 2 ' ||
+                    'are Type 2 Wastes' ),
+        ( 'Type 3', '(LCT0 < LC <= LCT1 or TC <= TCT1) | ' ||
+                    'where LCT0 is Leachable Concentration Threshold 0 ' ||
+                    'and LCT1 is Leachable Concentration Threshold 1 ' ||
+                    'and TCT1 is Total Concentration Threshold 1 ' ||
+                    'are Type 3 Wastes' ),
+        ( 'Type 4', '(LC <= LCT0 or TC <= TCT0) | ' ||
+                    'where LCT0 is Leachable Concentration Threshold 0 ' ||
+                    'and TCT0 is Total Concentration Threshold 0 ' ||
+                    'and less than or equal in mg/kg, ' ||
+                    'TOC=30 000, BTEX=6, PCBs=1, Mineral Oil (C10 to C40)=500 ' ||
+                    'and all pesticides=0.05 ' ||
+                    'are Type 4 Wastes' )
+;
