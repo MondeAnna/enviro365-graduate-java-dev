@@ -1,7 +1,7 @@
-package com.enviro.assessment.grad001.mondeanna;
+package com.enviro.assessment.grad001.mondeanna.waste;
 
-import com.enviro.assessment.grad001.mondeanna.model.Category;
-import com.enviro.assessment.grad001.mondeanna.model.Threshold;
+import com.enviro.assessment.grad001.mondeanna.waste.Category;
+import com.enviro.assessment.grad001.mondeanna.waste.Threshold;
 
 import java.util.List;
 

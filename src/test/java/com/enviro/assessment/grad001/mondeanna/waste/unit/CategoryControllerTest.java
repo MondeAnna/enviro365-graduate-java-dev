@@ -1,9 +1,9 @@
-package com.enviro.assessment.grad001.mondeanna.unit.controller;
+package com.enviro.assessment.grad001.mondeanna.waste.unit;
 
-import com.enviro.assessment.grad001.mondeanna.TestData;
-import com.enviro.assessment.grad001.mondeanna.controller.CategoryController;
-import com.enviro.assessment.grad001.mondeanna.model.Category;
-import com.enviro.assessment.grad001.mondeanna.repository.CategoryRepository;
+import com.enviro.assessment.grad001.mondeanna.waste.CategoryController;
+import com.enviro.assessment.grad001.mondeanna.waste.Category;
+import com.enviro.assessment.grad001.mondeanna.waste.CategoryRepository;
+import com.enviro.assessment.grad001.mondeanna.waste.TestData;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;

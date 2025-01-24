@@ -1,7 +1,4 @@
-package com.enviro.assessment.grad001.mondeanna.controller;
-
-import com.enviro.assessment.grad001.mondeanna.model.Category;
-import com.enviro.assessment.grad001.mondeanna.repository.CategoryRepository;
+package com.enviro.assessment.grad001.mondeanna.waste;
 
 import jakarta.validation.Valid;
 

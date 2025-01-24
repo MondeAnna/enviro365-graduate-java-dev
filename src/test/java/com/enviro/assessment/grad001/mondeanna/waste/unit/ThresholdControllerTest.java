@@ -1,9 +1,9 @@
-package com.enviro.assessment.grad001.mondeanna.unit.controller;
+package com.enviro.assessment.grad001.mondeanna.waste.unit;
 
-import com.enviro.assessment.grad001.mondeanna.TestData;
-import com.enviro.assessment.grad001.mondeanna.controller.ThresholdController;
-import com.enviro.assessment.grad001.mondeanna.model.Threshold;
-import com.enviro.assessment.grad001.mondeanna.repository.ThresholdRepository;
+import com.enviro.assessment.grad001.mondeanna.waste.TestData;
+import com.enviro.assessment.grad001.mondeanna.waste.ThresholdController;
+import com.enviro.assessment.grad001.mondeanna.waste.Threshold;
+import com.enviro.assessment.grad001.mondeanna.waste.ThresholdRepository;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;

@@ -1,7 +1,8 @@
-package com.enviro.assessment.grad001.mondeanna.unit.model;
+package com.enviro.assessment.grad001.mondeanna.waste.unit;
 
-import com.enviro.assessment.grad001.mondeanna.TestData;
-import com.enviro.assessment.grad001.mondeanna.model.Category;
+import com.enviro.assessment.grad001.mondeanna.waste.TestData;
+import com.enviro.assessment.grad001.mondeanna.waste.Category;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

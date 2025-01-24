@@ -1,4 +1,4 @@
-package com.enviro.assessment.grad001.mondeanna.model;
+package com.enviro.assessment.grad001.mondeanna.waste;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

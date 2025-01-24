@@ -1,7 +1,4 @@
-package com.enviro.assessment.grad001.mondeanna.controller;
-
-import com.enviro.assessment.grad001.mondeanna.model.Threshold;
-import com.enviro.assessment.grad001.mondeanna.repository.ThresholdRepository;
+package com.enviro.assessment.grad001.mondeanna.waste;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

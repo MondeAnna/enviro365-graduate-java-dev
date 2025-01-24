@@ -1,6 +1,6 @@
-package com.enviro.assessment.grad001.mondeanna.integration.controller;
+package com.enviro.assessment.grad001.mondeanna.waste.integration;
 
-import com.enviro.assessment.grad001.mondeanna.model.Category;
+import com.enviro.assessment.grad001.mondeanna.waste.Category;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
