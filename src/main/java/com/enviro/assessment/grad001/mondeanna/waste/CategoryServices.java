@@ -33,11 +33,10 @@ public class CategoryServices {
         return repository.save( category );
     }
 
-    public String delete( long id ){
+    public boolean delete( long id ){
         if ( !repository.existsById( id ))
-            return "Invalid argument";
-
+            return false;
         repository.deleteById( id );
-        return String.format( "ID %d Category deleted", id );
+        return true;
     }
 }
