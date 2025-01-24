@@ -3,10 +3,10 @@ package com.enviro.assessment.grad001.mondeanna.waste;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,10 +21,12 @@ public class CategoryController {
         this.repository = repository;
     }
 
-    @ResponseStatus( HttpStatus.CREATED )
     @PostMapping( path = "/" )
-    public Category save( @Valid @RequestBody Category category ){
-        return repository.save( category );
+    public ResponseEntity<Category> save( @Valid @RequestBody Category category ){
+        Category saved = repository.save( category );
+        String path = getFinalRequestPath( this, saved );
+        URI uri = URI.create( path );
+        return ResponseEntity.created( uri ).build();
     }
 
     @GetMapping( path = "/" )
@@ -51,5 +53,10 @@ public class CategoryController {
 
         repository.deleteById( id );
         return String.format( "ID %d Category deleted", id );
+    }
+
+    public String getFinalRequestPath( CategoryController controller, Category category ){
+        String base = controller.getClass().getAnnotation( RequestMapping.class ).path()[0];
+        return base + "/" + category.getId();
     }
 }

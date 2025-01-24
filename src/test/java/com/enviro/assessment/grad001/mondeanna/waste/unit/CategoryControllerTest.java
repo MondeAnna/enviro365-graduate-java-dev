@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +29,16 @@ public class CategoryControllerTest {
     private CategoryController controller;
 
     private final List<Category> mockRepo = TestData.mockCategoryRepo();
+
+    @Test
+    public void testSave(){
+        Category typeTwenty = TestData.typeTwenty();
+        URI uri = URI.create( "/api/v1/categories/20" );
+        ResponseEntity<URI> expected =  ResponseEntity.created( uri ).build();
+
+        Mockito.when( repository.save( typeTwenty )).thenReturn( typeTwenty );
+        assertThat( controller.save( typeTwenty )).isEqualTo( expected );
+    }
 
     @Test
     public void testFindAll(){
@@ -46,14 +57,6 @@ public class CategoryControllerTest {
     public void testFindByIdWithInvalidArg(){
         Mockito.when( repository.findById( any() )).thenReturn( Optional.empty() );
         assertThat( controller.findById( 2L )).isEqualTo( ResponseEntity.notFound().build() );
-    }
-
-    @Test
-    @Disabled
-    public void testSave(){
-        Category typeTwenty = TestData.typeTwenty();
-        when( repository.save( typeTwenty )).thenReturn( typeTwenty );
-        assertThat( controller.save( typeTwenty )).isEqualTo( typeTwenty );
     }
 
     @Test
