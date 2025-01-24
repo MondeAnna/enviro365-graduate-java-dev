@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,8 +28,8 @@ public class CategoryController {
     }
 
     @GetMapping( path = "/" )
-    public List<Category> findAll() {
-        return repository.findAll();
+    public ResponseEntity<List<Category>> findAll() {
+        return ResponseEntity.ok( repository.findAll() );
     }
 
     @GetMapping( path = "/{id}" )
