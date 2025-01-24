@@ -49,12 +49,12 @@ public class CategoryController {
     }
 
     @DeleteMapping( path = "/{id}" )
-    public String delete( @Valid @PathVariable long id ){
+    public ResponseEntity<String> delete( @Valid @PathVariable long id ){
         if ( !repository.existsById( id ))
-            return "Invalid argument";
+            return ResponseEntity.badRequest( ).body( "Invalid Argument" );
 
         repository.deleteById( id );
-        return String.format( "ID %d Category deleted", id );
+        return ResponseEntity.ok().body( String.format( "Category ID of %d deleted", id ));
     }
 
     public String getFinalRequestPath( CategoryController controller, Category category ){

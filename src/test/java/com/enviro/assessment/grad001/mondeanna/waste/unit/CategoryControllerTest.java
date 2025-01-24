@@ -4,16 +4,13 @@ import com.enviro.assessment.grad001.mondeanna.waste.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.net.URI;
@@ -83,16 +80,16 @@ public class CategoryControllerTest {
     }
 
     @Test
-    @Disabled
     public void testDeleteWithInvalidArgument(){
-        when( repository.existsById( 1000L )).thenReturn( false );
-        assertThat( controller.delete( 1000L )).isEqualTo( "Invalid argument" );
+        ResponseEntity<String> expected = ResponseEntity.badRequest( ).body( "Invalid Argument" );
+        Mockito.when( repository.existsById( any() )).thenReturn( false );
+        assertThat( controller.delete( 1000L )).isEqualTo( expected );
     }
 
     @Test
-    @Disabled
     public void testDelete(){
-        when( repository.existsById( 20L )).thenReturn( true );
-        assertThat( controller.delete( 20L )).isEqualTo( "ID 20 Category deleted" );
+        ResponseEntity<String> expected = ResponseEntity.ok().body( "Category ID of 20 deleted" );
+        Mockito.when( repository.existsById( any() )).thenReturn( true );
+        assertThat( controller.delete( 20L )).isEqualTo( expected );
     }
 }
