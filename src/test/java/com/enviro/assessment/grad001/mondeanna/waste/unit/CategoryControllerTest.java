@@ -28,10 +28,11 @@ public class CategoryControllerTest {
     private CategoryController controller;
 
     private final List<Category> mockRepo = TestData.mockCategoryRepo();
+    private final Category typeTwo = TestData.typeTwo();
+    private final Category typeTwenty = TestData.typeTwenty();
 
     @Test
     public void testSave(){
-        Category typeTwenty = TestData.typeTwenty();
         URI uri = URI.create( "/api/v1/categories/20" );
         ResponseEntity<URI> expected =  ResponseEntity.created( uri ).build();
 
@@ -47,7 +48,6 @@ public class CategoryControllerTest {
 
     @Test
     public void testFindById(){
-        Category typeTwo = TestData.typeTwo();
         Mockito.when( services.findById( 2L )).thenReturn( Optional.of( typeTwo ));
         assertThat( controller.findById( 2L )).isEqualTo( ResponseEntity.ok( typeTwo ));
     }
@@ -60,7 +60,6 @@ public class CategoryControllerTest {
 
     @Test
     public void testUpdate(){
-        Category typeTwo = TestData.typeTwo();
         Category updated = TestData.typeTwo();
 
         updated.setName( "updated name" );
@@ -72,11 +71,10 @@ public class CategoryControllerTest {
 
     @Test
     public void testUpdateWithInvalidArgs(){
-        Category typeTwo = TestData.typeTwo();
         ResponseEntity<Category> expected = ResponseEntity.badRequest().build();
 
         Mockito.when( services.update( anyLong(), any() )).thenReturn( Optional.empty() );
-        assertThat( controller.update( 2L, typeTwo )).isEqualTo( expected );
+        assertThat( controller.update( 20L, typeTwenty )).isEqualTo( expected );
     }
 
     @Test
