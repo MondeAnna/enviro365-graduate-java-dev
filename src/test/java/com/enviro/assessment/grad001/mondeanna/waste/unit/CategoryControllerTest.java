@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.net.URI;
@@ -70,6 +71,15 @@ public class CategoryControllerTest {
         Mockito.when( repository.existsById( 2L )).thenReturn( true );
         Mockito.when( repository.save( typeTwo )).thenReturn( updated );
         assertThat( controller.update( 2L, typeTwo )).isEqualTo( ResponseEntity.ok( updated ));
+    }
+
+    @Test
+    public void testUpdateWithInvalidArgs(){
+        Category typeTwo = TestData.typeTwo();
+        ResponseEntity<Category> expected = ResponseEntity.badRequest().build();
+
+        Mockito.when( repository.existsById( any() )).thenReturn( false );
+        assertThat( controller.update( 2L, typeTwo )).isEqualTo( expected );
     }
 
     @Test

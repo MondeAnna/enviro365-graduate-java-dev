@@ -42,6 +42,8 @@ public class CategoryController {
 
     @PutMapping( path = "/{id}" )
     public ResponseEntity<Category> update( @Valid @PathVariable long id, @Valid @RequestBody Category category ){
+        if ( !repository.existsById( id ))
+            return ResponseEntity.badRequest().build();
         category.setId( id );
         return ResponseEntity.ok( Optional.of( repository.save( category )).get() );
     }
