@@ -51,22 +51,32 @@ public class CategoryServicesTest {
     @Test
     public void testUpdate(){
         Category typeTwo = TestData.typeTwo();
-        Category typeFour = TestData.typeTwo();
-        typeFour.setId( 4L );
+        Category updated = TestData.typeTwo();
 
-        Mockito.when( repository.save( typeTwo )).thenReturn( typeFour );
-        assertThat( service.update( 4L, typeTwo )).isEqualTo( typeFour );
+        updated.setName( "updated name" );
+        updated.setDescription( "updated description" );
+
+        Mockito.when( repository.existsById( 2L )).thenReturn( true );
+        Mockito.when( repository.save( typeTwo )).thenReturn( updated );
+        assertThat( service.update( 2L, typeTwo )).isEqualTo( Optional.of( updated ));
     }
 
     @Test
-    public void testDeleteWithInvalidArgument(){
-        Mockito.when( repository.existsById( 1000L )).thenReturn( false );
-        assertThat( service.delete( 1000L )).isEqualTo( false );
+    public void testUpdateWithInvalidArgs(){
+        Category typeTwo = TestData.typeTwo();
+        Mockito.when( repository.existsById( 200L )).thenReturn( false );
+        assertThat( service.update( 200L, typeTwo )).isEqualTo( Optional.empty() );
     }
 
     @Test
     public void testDelete(){
         Mockito.when( repository.existsById( 20L )).thenReturn( true );
         assertThat( service.delete( 20L )).isEqualTo( true );
+    }
+
+    @Test
+    public void testDeleteWithInvalidArgument(){
+        Mockito.when( repository.existsById( 1000L )).thenReturn( false );
+        assertThat( service.delete( 1000L )).isEqualTo( false );
     }
 }

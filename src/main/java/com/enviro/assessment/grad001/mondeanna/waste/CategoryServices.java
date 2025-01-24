@@ -12,7 +12,7 @@ public class CategoryServices {
     private final CategoryRepository repository;
 
     @Autowired
-    public CategoryServices(CategoryRepository repository ){
+    public CategoryServices( CategoryRepository repository ){
         this.repository = repository;
     }
 
@@ -28,9 +28,11 @@ public class CategoryServices {
         return repository.findById( id );
     }
 
-    public Category update( long id, Category category ){
+    public Optional<Category> update( long id, Category category ){
+        if ( !repository.existsById( id ))
+            return Optional.empty();
         category.setId( id );
-        return repository.save( category );
+        return Optional.of( repository.save( category ));
     }
 
     public boolean delete( long id ){
