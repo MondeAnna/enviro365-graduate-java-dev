@@ -88,6 +88,18 @@ public class ControllerIntegrationTest {
         assertThat( category.getDescription() ).contains( "(LCT0 < LC <= LCT1 or TC <= TCT1)" );
     }
 
+    @Test
+    @Disabled( "need apply a filtering service" )
+    public void testIntegrationOfFindByIdWithInvalidArgs() throws Exception {
+        MockHttpServletResponse response = mockMvc.perform( get( requestMapping + "/4000" ))
+                .andExpect( status().isNotFound() )
+                .andReturn().getResponse();
+
+        assertThat( response.getContentAsString() ).contains( "'status': 404" );
+        assertThat( response.getContentAsString() )
+                .contains( String.format( "'path': '%s/4000'", requestMapping ));
+    }
+
     private List<Category> deserializeRepository(MockHttpServletResponse response ) throws UnsupportedEncodingException, JsonProcessingException {
         return objectMapper.readValue( response.getContentAsString(), new TypeReference<>(){} );
     }
