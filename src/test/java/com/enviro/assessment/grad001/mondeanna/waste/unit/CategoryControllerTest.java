@@ -4,6 +4,7 @@ import com.enviro.assessment.grad001.mondeanna.waste.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -21,7 +22,7 @@ import java.util.Optional;
 public class CategoryControllerTest {
 
     @Mock
-    private CategoryRepository repository;
+    private CategoryServices services;
 
     @InjectMocks
     private CategoryController controller;
@@ -34,26 +35,26 @@ public class CategoryControllerTest {
         URI uri = URI.create( "/api/v1/categories/20" );
         ResponseEntity<URI> expected =  ResponseEntity.created( uri ).build();
 
-        Mockito.when( repository.save( typeTwenty )).thenReturn( typeTwenty );
+        Mockito.when( services.save( typeTwenty )).thenReturn( typeTwenty );
         assertThat( controller.save( typeTwenty )).isEqualTo( expected );
     }
 
     @Test
     public void testFindAll(){
-        Mockito.when( repository.findAll() ).thenReturn( mockRepo );
+        Mockito.when( services.findAll() ).thenReturn( mockRepo );
         assertThat( controller.findAll() ).isEqualTo( ResponseEntity.ok( mockRepo ));
     }
 
     @Test
     public void testFindById(){
         Category typeTwo = TestData.typeTwo();
-        Mockito.when( repository.findById( any() )).thenReturn( Optional.of( typeTwo ));
+        Mockito.when( services.findById( 2L )).thenReturn( Optional.of( typeTwo ));
         assertThat( controller.findById( 2L )).isEqualTo( ResponseEntity.ok( typeTwo ));
     }
 
     @Test
     public void testFindByIdWithInvalidArg(){
-        Mockito.when( repository.findById( any() )).thenReturn( Optional.empty() );
+        Mockito.when( services.findById( anyLong() )).thenReturn( Optional.empty() );
         assertThat( controller.findById( 2L )).isEqualTo( ResponseEntity.notFound().build() );
     }
 
@@ -65,8 +66,7 @@ public class CategoryControllerTest {
         updated.setName( "updated name" );
         updated.setDescription( "updated description" );
 
-        Mockito.when( repository.existsById( 2L )).thenReturn( true );
-        Mockito.when( repository.save( typeTwo )).thenReturn( updated );
+        Mockito.when( services.update( 2L, typeTwo )).thenReturn( Optional.of( updated ));
         assertThat( controller.update( 2L, typeTwo )).isEqualTo( ResponseEntity.ok( updated ));
     }
 
@@ -75,21 +75,21 @@ public class CategoryControllerTest {
         Category typeTwo = TestData.typeTwo();
         ResponseEntity<Category> expected = ResponseEntity.badRequest().build();
 
-        Mockito.when( repository.existsById( any() )).thenReturn( false );
+        Mockito.when( services.update( anyLong(), any() )).thenReturn( Optional.empty() );
         assertThat( controller.update( 2L, typeTwo )).isEqualTo( expected );
     }
 
     @Test
     public void testDeleteWithInvalidArgument(){
         ResponseEntity<String> expected = ResponseEntity.badRequest( ).body( "Invalid Argument" );
-        Mockito.when( repository.existsById( any() )).thenReturn( false );
+        Mockito.when( services.delete( anyLong() )).thenReturn( false );
         assertThat( controller.delete( 1000L )).isEqualTo( expected );
     }
 
     @Test
     public void testDelete(){
         ResponseEntity<String> expected = ResponseEntity.ok().body( "Category ID of 20 deleted" );
-        Mockito.when( repository.existsById( any() )).thenReturn( true );
+        Mockito.when( services.delete( 20L )).thenReturn( true );
         assertThat( controller.delete( 20L )).isEqualTo( expected );
     }
 }

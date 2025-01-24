@@ -14,16 +14,16 @@ import java.util.Optional;
 @RequestMapping( path = "/api/v1/categories" )
 public class CategoryController {
 
-    private final CategoryRepository repository;
+    private final CategoryServices services;
 
     @Autowired
-    public CategoryController( CategoryRepository repository ){
-        this.repository = repository;
+    public CategoryController( CategoryServices services ){
+        this.services = services;
     }
 
     @PostMapping( path = "/" )
     public ResponseEntity<Category> save( @Valid @RequestBody Category category ){
-        Category saved = repository.save( category );
+        Category saved = services.save( category );
         String path = getFinalRequestPath( this, saved );
         URI uri = URI.create( path );
         return ResponseEntity.created( uri ).build();
@@ -31,29 +31,25 @@ public class CategoryController {
 
     @GetMapping( path = "/" )
     public ResponseEntity<List<Category>> findAll() {
-        return ResponseEntity.ok( repository.findAll() );
+        return ResponseEntity.ok( services.findAll() );
     }
 
     @GetMapping( path = "/{id}" )
     public ResponseEntity<Category> findById( @Valid @PathVariable long id ){
-        Optional<Category> optional = repository.findById( id );
+        Optional<Category> optional = services.findById( id );
         return optional.map( ResponseEntity::ok ).orElseGet( () -> ResponseEntity.notFound().build() );
     }
 
     @PutMapping( path = "/{id}" )
     public ResponseEntity<Category> update( @Valid @PathVariable long id, @Valid @RequestBody Category category ){
-        if ( !repository.existsById( id ))
-            return ResponseEntity.badRequest().build();
-        category.setId( id );
-        return ResponseEntity.ok( Optional.of( repository.save( category )).get() );
+        Optional<Category> optional = services.update( id, category );
+        return optional.map( ResponseEntity::ok ).orElseGet( () -> ResponseEntity.badRequest().build() );
     }
 
     @DeleteMapping( path = "/{id}" )
     public ResponseEntity<String> delete( @Valid @PathVariable long id ){
-        if ( !repository.existsById( id ))
+        if ( !services.delete( id ))
             return ResponseEntity.badRequest( ).body( "Invalid Argument" );
-
-        repository.deleteById( id );
         return ResponseEntity.ok().body( String.format( "Category ID of %d deleted", id ));
     }
 
