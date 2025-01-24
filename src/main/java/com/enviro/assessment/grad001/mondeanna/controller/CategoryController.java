@@ -23,7 +23,7 @@ public class CategoryController {
     }
 
     @PostMapping( path = "/" )
-    public Category save( @RequestBody Category category ){
+    public Category save( @Valid @RequestBody Category category ){
         return repository.save( category );
     }
 
@@ -38,7 +38,7 @@ public class CategoryController {
     }
 
     @PutMapping( path = "/{id}" )
-    public Category update( @Valid @PathVariable long id, @RequestBody Category category ){
+    public Category update( @Valid @PathVariable long id, @Valid @RequestBody Category category ){
         category.setId( id );
         return repository.save( category );
     }
