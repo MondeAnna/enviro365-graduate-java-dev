@@ -6,6 +6,7 @@ import com.enviro.assessment.grad001.mondeanna.repository.CategoryRepository;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class CategoryController {
         this.repository = repository;
     }
 
+    @ResponseStatus( HttpStatus.CREATED )
     @PostMapping( path = "/" )
     public Category save( @Valid @RequestBody Category category ){
         return repository.save( category );
