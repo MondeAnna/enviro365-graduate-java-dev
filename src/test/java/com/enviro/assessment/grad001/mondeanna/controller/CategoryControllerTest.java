@@ -71,4 +71,16 @@ public class CategoryControllerTest {
         when( repository.save( typeTwo )).thenReturn( typeFour );
         assertThat( repository.save( typeTwo )).isEqualTo( typeFour );
     }
+
+    @Test
+    public void testDeleteWithInvalidArgument(){
+        when( repository.existsById( 1000L )).thenReturn( false );
+        assertThat( controller.delete( 1000L )).isEqualTo( "Invalid argument" );
+    }
+
+    @Test
+    public void testDelete(){
+        when( repository.existsById( 20L )).thenReturn( true );
+        assertThat( controller.delete( 20L )).isEqualTo( "ID 20 Category deleted" );
+    }
 }
