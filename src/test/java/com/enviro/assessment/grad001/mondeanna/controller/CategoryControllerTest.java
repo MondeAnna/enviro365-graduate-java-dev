@@ -29,7 +29,7 @@ public class CategoryControllerTest {
     @Test
     public void testFindAll(){
         when( repository.findAll() ).thenReturn( mockRepo );
-        assertThat( controller.findAll().size() ).isEqualTo( 2 );
+        assertThat( controller.findAll() ).isEqualTo( mockRepo );
     }
 
     @Test
@@ -59,7 +59,7 @@ public class CategoryControllerTest {
         );
 
         when( repository.save( typeThree )).thenReturn( typeThree );
-        assertThat( repository.save( typeThree )).isEqualTo( typeThree );
+        assertThat( controller.save( typeThree )).isEqualTo( typeThree );
     }
 
     @Test
@@ -69,7 +69,7 @@ public class CategoryControllerTest {
         typeFour.setId( 4L );
 
         when( repository.save( typeTwo )).thenReturn( typeFour );
-        assertThat( repository.save( typeTwo )).isEqualTo( typeFour );
+        assertThat( controller.update( 4L, typeTwo )).isEqualTo( typeFour );
     }
 
     @Test
