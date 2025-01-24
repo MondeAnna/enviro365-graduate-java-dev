@@ -49,7 +49,24 @@ public class ControllerIntegrationTest {
         assertThat( responseRepository.get( 2 ).getDescription() ).contains( "(LCT1 < LC <= LCT2 or TC <= TCT1)" );
     }
 
+    @Test
+    public void testIntegrationOfFindById() throws Exception {
+        MockHttpServletResponse response = mockMvc.perform( get( requestMapping + "/4" ))
+                .andExpect( status().isOk() )
+                .andReturn().getResponse();
+
+        Category category = deserializeCategory( response );
+
+        assertThat( category.getId() ).isEqualTo( 4 );
+        assertThat( category.getName() ).isEqualTo( "Type 3");
+        assertThat( category.getDescription() ).contains( "(LCT0 < LC <= LCT1 or TC <= TCT1)" );
+    }
+
     private List<Category> deserializeRepository(MockHttpServletResponse response ) throws UnsupportedEncodingException, JsonProcessingException {
         return objectMapper.readValue( response.getContentAsString(), new TypeReference<>(){} );
+    }
+
+    private Category deserializeCategory(MockHttpServletResponse response ) throws UnsupportedEncodingException, JsonProcessingException {
+        return objectMapper.readValue( response.getContentAsString(), Category.class );
     }
 }
