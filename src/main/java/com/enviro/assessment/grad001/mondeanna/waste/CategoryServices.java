@@ -1,0 +1,43 @@
+package com.enviro.assessment.grad001.mondeanna.waste;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class CategoryServices {
+
+    private final CategoryRepository repository;
+
+    @Autowired
+    public CategoryServices(CategoryRepository repository ){
+        this.repository = repository;
+    }
+
+    public Category save( Category category ){
+        return repository.save( category );
+    }
+
+    public List<Category> findAll(){
+        return repository.findAll();
+    }
+
+    public Optional<Category> findById( long id ){
+        return repository.findById( id );
+    }
+
+    public Category update( long id, Category category ){
+        category.setId( id );
+        return repository.save( category );
+    }
+
+    public String delete( long id ){
+        if ( !repository.existsById( id ))
+            return "Invalid argument";
+
+        repository.deleteById( id );
+        return String.format( "ID %d Category deleted", id );
+    }
+}
