@@ -46,4 +46,19 @@ public class CategoryControllerTest {
         when( repository.findById( 2L )).thenReturn( Optional.of( typeTwo ));
         assertThat( controller.findById( 2L )).isEqualTo( Optional.of( TestData.typeTwo() ));
     }
+
+    @Test
+    public void testSave(){
+        Category typeThree = new Category(
+                3L,
+                "Type3",
+                """
+                leachable concentration between 2 and 3 as well as \
+                total concentration less that level 2 is type 3
+                """
+        );
+
+        when( repository.save( typeThree )).thenReturn( typeThree );
+        assertThat( repository.save( typeThree )).isEqualTo( typeThree );
+    }
 }
