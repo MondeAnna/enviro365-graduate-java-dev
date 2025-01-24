@@ -36,4 +36,10 @@ public class CategoryController {
     public Category save( @RequestBody Category category ){
         return repository.save( category );
     }
+
+    @PutMapping( path = "/{id}" )
+    public Category update( @Valid @PathVariable long id, @RequestBody Category category ){
+        category.setId( id );
+        return repository.save( category );
+    }
 }

@@ -61,4 +61,14 @@ public class CategoryControllerTest {
         when( repository.save( typeThree )).thenReturn( typeThree );
         assertThat( repository.save( typeThree )).isEqualTo( typeThree );
     }
+
+    @Test
+    public void testUpdate(){
+        Category typeTwo = TestData.typeTwo();
+        Category typeFour = TestData.typeTwo();
+        typeFour.setId( 4L );
+
+        when( repository.save( typeTwo )).thenReturn( typeFour );
+        assertThat( repository.save( typeTwo )).isEqualTo( typeFour );
+    }
 }
