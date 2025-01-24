@@ -33,8 +33,9 @@ public class CategoryController {
     }
 
     @GetMapping( path = "/{id}" )
-    public Optional<Category> findById( @Valid @PathVariable long id ){
-        return repository.findById( id );
+    public ResponseEntity<Category> findById( @Valid @PathVariable long id ){
+        Optional<Category> optional = repository.findById( id );
+        return optional.map( ResponseEntity::ok ).orElseGet( () -> ResponseEntity.notFound().build() );
     }
 
     @PutMapping( path = "/{id}" )

@@ -3,6 +3,7 @@ package com.enviro.assessment.grad001.mondeanna.waste.unit;
 import com.enviro.assessment.grad001.mondeanna.waste.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Disabled;
@@ -35,11 +36,16 @@ public class CategoryControllerTest {
     }
 
     @Test
-    @Disabled
     public void testFindById(){
         Category typeTwo = TestData.typeTwo();
-        when( repository.findById( 2L )).thenReturn( Optional.of( typeTwo ));
-        assertThat( controller.findById( 2L )).isEqualTo( Optional.of( typeTwo ));
+        Mockito.when( repository.findById( any() )).thenReturn( Optional.of( typeTwo ));
+        assertThat( controller.findById( 2L )).isEqualTo( ResponseEntity.ok( typeTwo ));
+    }
+
+    @Test
+    public void testFindByIdWithInvalidArg(){
+        Mockito.when( repository.findById( any() )).thenReturn( Optional.empty() );
+        assertThat( controller.findById( 2L )).isEqualTo( ResponseEntity.notFound().build() );
     }
 
     @Test
