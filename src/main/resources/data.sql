@@ -84,7 +84,7 @@ VALUES
         ( 'Heptachlor', 'C10H5Cl7', 0.05, 1.2, 4.8, 0.0, 0.015, 0.03, 0.03 )
 ;
 
-INSERT INTO categories ( name, description )
+INSERT INTO waste_categories ( name, description )
 
 VALUES
         ( 'Type 0', '(LC > LCT3 or TC > TCT2) | ' ||

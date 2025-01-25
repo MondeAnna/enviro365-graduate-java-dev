@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table( name = "categories" )
+@Table( name = "waste_categories" )
 public class WasteCategory {
 
         @Id
