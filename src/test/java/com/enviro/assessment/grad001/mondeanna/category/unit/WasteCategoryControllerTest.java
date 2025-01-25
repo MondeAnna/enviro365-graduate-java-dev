@@ -33,7 +33,7 @@ public class WasteCategoryControllerTest {
 
     @Test
     public void testSave(){
-        URI uri = URI.create( "/api/v1/categories/20" );
+        URI uri = URI.create( "/api/v1/waste-categories/20" );
         ResponseEntity<URI> expected =  ResponseEntity.created( uri ).build();
 
         Mockito.when( services.save( typeTwenty )).thenReturn( typeTwenty );

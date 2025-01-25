@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping( path = "/api/v1/categories" )
+@RequestMapping( path = "/api/v1/waste-categories" )
 public class WasteCategoryController {
 
     private final WasteCategoryServices services;

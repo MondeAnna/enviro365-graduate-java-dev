@@ -38,7 +38,7 @@ public class ControllerIntegrationTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private final String requestMapping = "/api/v1/categories";
+    private final String requestMapping = "/api/v1/waste-categories";
 
     @Test
     @Disabled( "response is status code 400 instead of 201" )
