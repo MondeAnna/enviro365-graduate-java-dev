@@ -29,7 +29,7 @@ public class DisposalGuidelineTest {
 
     @Test
     public void testClassClassificationValue(){
-        guideline = TestData.validClassification();
+        guideline = TestData.validGuideline();
 
         assertThat( guideline.getId() ).isEqualTo( 1 );
         assertThat( guideline.getClassification() ).isEqualTo( "A" );

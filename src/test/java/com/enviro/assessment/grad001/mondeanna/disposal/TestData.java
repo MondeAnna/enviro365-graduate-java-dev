@@ -4,7 +4,7 @@ import java.util.List;
 
 public class TestData {
 
-    public static DisposalGuideline validClassification(){
+    public static DisposalGuideline validGuideline(){
         return DisposalGuideline.builder()
                 .id( 1L )
                 .classification( "A" )
@@ -51,6 +51,6 @@ public class TestData {
     }
 
     public static List<DisposalGuideline> mockDisposalGuidelineRepo(){
-        return List.of( validClassification() );
+        return List.of( validGuideline() );
     }
 }

@@ -22,7 +22,6 @@ import java.util.Optional;
 @SpringBootTest
 public class DisposalGuidelineControllerTest {
 
-    /* temporarily unused
     @Mock
     private DisposalGuidelineServices services;
 
@@ -30,16 +29,15 @@ public class DisposalGuidelineControllerTest {
     private DisposalGuidelineController controller;
 
     private final List<DisposalGuideline> mockRepo = TestData.mockDisposalGuidelineRepo();
-    private final DisposalGuideline typeTwo = TestData.typeTwo();
-    private final DisposalGuideline typeTwenty = TestData.typeTwenty();
+    private final DisposalGuideline guideline = TestData.validGuideline();
 
     @Test
     public void testSave(){
-        URI uri = URI.create( "/api/v1/disposal-guidelines/20" );
+        URI uri = URI.create( "/api/v1/disposal-guidelines/1" );
         ResponseEntity<URI> expected =  ResponseEntity.created( uri ).build();
 
-        Mockito.when( services.save( typeTwenty )).thenReturn( typeTwenty );
-        assertThat( controller.save( typeTwenty )).isEqualTo( expected );
+        Mockito.when( services.save( guideline )).thenReturn( guideline );
+        assertThat( controller.save( guideline )).isEqualTo( expected );
     }
 
     @Test
@@ -50,8 +48,8 @@ public class DisposalGuidelineControllerTest {
 
     @Test
     public void testFindById(){
-        Mockito.when( services.findById( 2L )).thenReturn( Optional.of( typeTwo ));
-        assertThat( controller.findById( 2L )).isEqualTo( ResponseEntity.ok( typeTwo ));
+        Mockito.when( services.findById( 2L )).thenReturn( Optional.of( guideline ));
+        assertThat( controller.findById( 2L )).isEqualTo( ResponseEntity.ok( guideline ));
     }
 
     @Test
@@ -62,13 +60,15 @@ public class DisposalGuidelineControllerTest {
 
     @Test
     public void testUpdate(){
-        DisposalGuideline updated = TestData.typeTwo();
+        DisposalGuideline updated = TestData.validGuideline();
 
-        updated.setName( "updated name" );
+        updated.setClassification( "updated classification" );
+        updated.setWasteCategory( "updated waste category" );
         updated.setDescription( "updated description" );
+        updated.setLandfill( "updated landfill" );
 
-        Mockito.when( services.update( 2L, typeTwo )).thenReturn( Optional.of( updated ));
-        assertThat( controller.update( 2L, typeTwo )).isEqualTo( ResponseEntity.ok( updated ));
+        Mockito.when( services.update( 2L, guideline )).thenReturn( Optional.of( updated ));
+        assertThat( controller.update( 2L, guideline )).isEqualTo( ResponseEntity.ok( updated ));
     }
 
     @Test
@@ -76,7 +76,7 @@ public class DisposalGuidelineControllerTest {
         ResponseEntity<DisposalGuideline> expected = ResponseEntity.badRequest().build();
 
         Mockito.when( services.update( anyLong(), any() )).thenReturn( Optional.empty() );
-        assertThat( controller.update( 20L, typeTwenty )).isEqualTo( expected );
+        assertThat( controller.update( 20L, guideline )).isEqualTo( expected );
     }
 
     @Test
@@ -92,5 +92,4 @@ public class DisposalGuidelineControllerTest {
         Mockito.when( services.delete( 20L )).thenReturn( true );
         assertThat( controller.delete( 20L )).isEqualTo( expected );
     }
-    */
 }

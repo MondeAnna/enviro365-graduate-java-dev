@@ -27,7 +27,7 @@ public class DisposalGuidelineServicesTest {
     private DisposalGuidelineServices service;
 
     private final List<DisposalGuideline> mockRepo = TestData.mockDisposalGuidelineRepo();
-    private final DisposalGuideline guideline = TestData.validClassification();
+    private final DisposalGuideline guideline = TestData.validGuideline();
 
     @Test
     public void testFindAll(){
@@ -49,7 +49,7 @@ public class DisposalGuidelineServicesTest {
 
     @Test
     public void testUpdate(){
-        DisposalGuideline updated = TestData.validClassification();
+        DisposalGuideline updated = TestData.validGuideline();
 
         updated.setClassification( "updated classification" );
         updated.setDescription( "updated description" );
