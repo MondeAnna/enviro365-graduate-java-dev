@@ -1,6 +1,6 @@
 package com.enviro.assessment.grad001.mondeanna.category.unit;
 
-import com.enviro.assessment.grad001.mondeanna.disposal.DisposalGuideline;
+import com.enviro.assessment.grad001.mondeanna.category.WasteCategory;
 import com.enviro.assessment.grad001.mondeanna.category.WasteCategoryRepository;
 import com.enviro.assessment.grad001.mondeanna.category.WasteCategoryServices;
 import com.enviro.assessment.grad001.mondeanna.category.TestData;
@@ -26,7 +26,7 @@ public class WasteCategoryServicesTest {
     @InjectMocks
     private WasteCategoryServices service;
 
-    private final List<DisposalGuideline> mockRepo = TestData.mockWasteCategoryRepo();
+    private final List<WasteCategory> mockRepo = TestData.mockWasteCategoryRepo();
 
     @Test
     public void testFindAll(){
@@ -36,22 +36,22 @@ public class WasteCategoryServicesTest {
 
     @Test
     public void testFindById(){
-        DisposalGuideline typeTwo = TestData.typeTwo();
+        WasteCategory typeTwo = TestData.typeTwo();
         Mockito.when( repository.findById( 2L )).thenReturn( Optional.of( typeTwo ));
         assertThat( service.findById( 2L )).isEqualTo( Optional.of( typeTwo ));
     }
 
     @Test
     public void testSave(){
-        DisposalGuideline typeTwenty = TestData.typeTwenty();
+        WasteCategory typeTwenty = TestData.typeTwenty();
         Mockito.when( repository.save( typeTwenty )).thenReturn( typeTwenty );
         assertThat( service.save( typeTwenty )).isEqualTo( typeTwenty );
     }
 
     @Test
     public void testUpdate(){
-        DisposalGuideline typeTwo = TestData.typeTwo();
-        DisposalGuideline updated = TestData.typeTwo();
+        WasteCategory typeTwo = TestData.typeTwo();
+        WasteCategory updated = TestData.typeTwo();
 
         updated.setName( "updated name" );
         updated.setDescription( "updated description" );
@@ -63,7 +63,7 @@ public class WasteCategoryServicesTest {
 
     @Test
     public void testUpdateWithInvalidArgs(){
-        DisposalGuideline typeTwo = TestData.typeTwo();
+        WasteCategory typeTwo = TestData.typeTwo();
         Mockito.when( repository.existsById( 200L )).thenReturn( false );
         assertThat( service.update( 200L, typeTwo )).isEqualTo( Optional.empty() );
     }

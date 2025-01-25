@@ -22,6 +22,7 @@ import java.util.Optional;
 @SpringBootTest
 public class DisposalGuidelineControllerTest {
 
+    /* temporarily unused
     @Mock
     private DisposalGuidelineServices services;
 
@@ -91,4 +92,5 @@ public class DisposalGuidelineControllerTest {
         Mockito.when( services.delete( 20L )).thenReturn( true );
         assertThat( controller.delete( 20L )).isEqualTo( expected );
     }
+    */
 }

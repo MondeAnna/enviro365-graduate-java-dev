@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import jakarta.validation.constraints.Null;
+import jakarta.validation.constraints.Pattern;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,10 +25,18 @@ public class DisposalGuideline {
         private Long id;
 
         @NotBlank
+        @Pattern( regexp = "[A-D]", message = "Allowed: 'A', 'B', 'C' or 'D'" )
+        private String classification;
+
+        @NotBlank
         @Column( unique = true )
-        private String name;
+        private String wasteCategory;
 
         @NotBlank
         @Column( unique = true )
         private String description;
+
+        @NotBlank
+        @Column( unique = true )
+        private String landfill;
 }

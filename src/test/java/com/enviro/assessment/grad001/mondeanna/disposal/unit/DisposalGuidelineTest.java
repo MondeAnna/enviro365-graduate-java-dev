@@ -1,6 +1,6 @@
 package com.enviro.assessment.grad001.mondeanna.disposal.unit;
 
-import com.enviro.assessment.grad001.mondeanna.category.TestData;
+import com.enviro.assessment.grad001.mondeanna.disposal.TestData;
 import com.enviro.assessment.grad001.mondeanna.disposal.DisposalGuideline;
 
 import org.junit.jupiter.api.Test;
@@ -8,20 +8,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-
 @SpringBootTest
 public class DisposalGuidelineTest {
 
     @Test
-    void testInstanceConstruction(){
-        DisposalGuideline typeTwenty = TestData.typeTwenty();
+    public void testClassClassificationValue(){
+        DisposalGuideline validClassification = TestData.validClassification();
 
-        assertThat( typeTwenty.getId() ).isEqualTo( 20 );
-        assertThat( typeTwenty.getName() ).isEqualTo( "Type20" );
-
-        String description = typeTwenty.getDescription();
-
-        for ( String expected : new String[]{ "chemical", "substances", "waste", "type", "20" })
-            assertThat( description ).contains( expected );
+        assertThat( validClassification.getId() ).isEqualTo( 1 );
+        assertThat( validClassification.getClassification() ).isEqualTo( "A" );
+        assertThat( validClassification.getDescription() ).isEqualTo( "a long description" );
+        assertThat( validClassification.getWasteCategory() ).isEqualTo( "waste category" );
+        assertThat( validClassification.getLandfill() ).isEqualTo( "landfill shorthand" );
     }
 }

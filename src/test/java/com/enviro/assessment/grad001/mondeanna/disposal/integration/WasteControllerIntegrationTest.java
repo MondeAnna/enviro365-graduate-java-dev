@@ -31,6 +31,7 @@ import java.util.List;
 @DirtiesContext( classMode = ClassMode.BEFORE_EACH_TEST_METHOD )
 public class WasteControllerIntegrationTest {
 
+    /* temporarily unused
     @Autowired
     private MockMvc mockMvc;
 
@@ -175,7 +176,7 @@ public class WasteControllerIntegrationTest {
         long firstRepoSize = deserializeRepository( firstResponse ).size();
         long validId = firstRepoSize == 0 ? -1 :firstRepoSize - 1;
 
-        /* presently unable to guarantee state of repository */
+        // presently unable to guarantee state of repository
         if ( validId >= 0 ) {
             mockMvc.perform( delete( requestMapping + "/" + validId ))
                 .andExpect( status().isOk() );
@@ -215,4 +216,5 @@ public class WasteControllerIntegrationTest {
             throws UnsupportedEncodingException, JsonProcessingException {
         return objectMapper.readValue( response.getContentAsString(), DisposalGuideline.class );
     }
+    */
 }

@@ -1,6 +1,6 @@
 package com.enviro.assessment.grad001.mondeanna.category.integration;
 
-import com.enviro.assessment.grad001.mondeanna.disposal.DisposalGuideline;
+import com.enviro.assessment.grad001.mondeanna.category.WasteCategory;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -54,7 +54,7 @@ public class WasteControllerIntegrationTest {
         assertThat( response.getContentAsString() ).contains( "id" );
         assertThat( response.getContentAsString() ).contains( json );
 
-        DisposalGuideline typeTen = deserializeWasteCategory( response );
+        WasteCategory typeTen = deserializeWasteCategory( response );
 
         assertThat( response.getStatus() ).isEqualTo( HttpStatus.CREATED.value() );
         assertThat( typeTen.getName() ).isEqualTo( "Type 10" );
@@ -80,7 +80,7 @@ public class WasteControllerIntegrationTest {
                 .andExpect( status().isOk() )
                 .andReturn().getResponse();
 
-        List<DisposalGuideline> responseRepository = deserializeRepository( response );
+        List<WasteCategory> responseRepository = deserializeRepository( response );
         String expectedDescription = "(LCT1 < LC <= LCT2 or TC <= TCT1)";
 
         assertThat( responseRepository.get( 0 ).getId() ).isEqualTo( 1 );
@@ -95,7 +95,7 @@ public class WasteControllerIntegrationTest {
                 .andExpect( status().isOk() )
                 .andReturn().getResponse();
 
-        DisposalGuideline category = deserializeWasteCategory( response );
+        WasteCategory category = deserializeWasteCategory( response );
         String expectedDescription = "(LCT0 < LC <= LCT1 or TC <= TCT1)";
 
         assertThat( category.getId() ).isEqualTo( 4 );
@@ -109,7 +109,7 @@ public class WasteControllerIntegrationTest {
                 .andExpect( status().isOk() )
                 .andReturn().getResponse();
 
-        List<DisposalGuideline> responseRepository = deserializeRepository( response );
+        List<WasteCategory> responseRepository = deserializeRepository( response );
         int invalidId = responseRepository.size() + 1;
 
         mockMvc.perform( get( requestMapping + "/" + invalidId ))
@@ -124,7 +124,7 @@ public class WasteControllerIntegrationTest {
                 .andExpect( status().isOk() )
                 .andReturn().getResponse();
 
-        DisposalGuideline category = deserializeRepository( findAllResponse ).get( 0 );
+        WasteCategory category = deserializeRepository( findAllResponse ).get( 0 );
         long id = category.getId();
 
         assertThat( category.getId() ).isEqualTo( id );
@@ -142,7 +142,7 @@ public class WasteControllerIntegrationTest {
         assertThat( response.getContentAsString() ).contains( "'id': 1" );
         assertThat( response.getContentAsString() ).contains( json );
 
-        DisposalGuideline typeTen = deserializeWasteCategory( response );
+        WasteCategory typeTen = deserializeWasteCategory( response );
 
         assertThat( typeTen.getName() ).isEqualTo( "Type 10" );
         assertThat( typeTen.getDescription() ).isEqualTo( "fancy test description" );
@@ -154,7 +154,7 @@ public class WasteControllerIntegrationTest {
                 .andExpect( status().isOk() )
                 .andReturn().getResponse();
 
-        List<DisposalGuideline> responseRepository = deserializeRepository( response );
+        List<WasteCategory> responseRepository = deserializeRepository( response );
         int invalidId = responseRepository.size() + 1;
 
         String json = "{'name': 'Type 10', 'description': 'updated description'}";
@@ -206,13 +206,13 @@ public class WasteControllerIntegrationTest {
             .andExpect( status().isBadRequest() );
     }
 
-    private List<DisposalGuideline> deserializeRepository(MockHttpServletResponse response )
+    private List<WasteCategory> deserializeRepository(MockHttpServletResponse response )
             throws UnsupportedEncodingException, JsonProcessingException {
         return objectMapper.readValue( response.getContentAsString(), new TypeReference<>(){} );
     }
 
-    private DisposalGuideline deserializeWasteCategory(MockHttpServletResponse response )
+    private WasteCategory deserializeWasteCategory(MockHttpServletResponse response )
             throws UnsupportedEncodingException, JsonProcessingException {
-        return objectMapper.readValue( response.getContentAsString(), DisposalGuideline.class );
+        return objectMapper.readValue( response.getContentAsString(), WasteCategory.class );
     }
 }

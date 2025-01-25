@@ -4,6 +4,17 @@ import java.util.List;
 
 public class TestData {
 
+    public static DisposalGuideline validClassification(){
+        return DisposalGuideline.builder()
+                .id( 1L )
+                .classification( "A" )
+                .description( "a long description" )
+                .wasteCategory( "waste category" )
+                .landfill( "landfill shorthand" )
+                .build();
+    }
+
+    /* temporarily unused
     public static DisposalGuideline typeTwo(){
         return DisposalGuideline.builder()
                 .id( 2L )
@@ -29,4 +40,5 @@ public class TestData {
     public static List<DisposalGuideline> mockDisposalGuidelineRepo(){
         return List.of( typeTwo(), typeTwenty() );
     }
+    */
 }

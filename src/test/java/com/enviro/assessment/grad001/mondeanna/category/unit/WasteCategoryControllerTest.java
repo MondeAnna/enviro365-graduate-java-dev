@@ -6,7 +6,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 
-import com.enviro.assessment.grad001.mondeanna.disposal.DisposalGuideline;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -28,9 +27,9 @@ public class WasteCategoryControllerTest {
     @InjectMocks
     private WasteCategoryController controller;
 
-    private final List<DisposalGuideline> mockRepo = TestData.mockWasteCategoryRepo();
-    private final DisposalGuideline typeTwo = TestData.typeTwo();
-    private final DisposalGuideline typeTwenty = TestData.typeTwenty();
+    private final List<WasteCategory> mockRepo = TestData.mockWasteCategoryRepo();
+    private final WasteCategory typeTwo = TestData.typeTwo();
+    private final WasteCategory typeTwenty = TestData.typeTwenty();
 
     @Test
     public void testSave(){
@@ -61,7 +60,7 @@ public class WasteCategoryControllerTest {
 
     @Test
     public void testUpdate(){
-        DisposalGuideline updated = TestData.typeTwo();
+        WasteCategory updated = TestData.typeTwo();
 
         updated.setName( "updated name" );
         updated.setDescription( "updated description" );
@@ -72,7 +71,7 @@ public class WasteCategoryControllerTest {
 
     @Test
     public void testUpdateWithInvalidArgs(){
-        ResponseEntity<DisposalGuideline> expected = ResponseEntity.badRequest().build();
+        ResponseEntity<WasteCategory> expected = ResponseEntity.badRequest().build();
 
         Mockito.when( services.update( anyLong(), any() )).thenReturn( Optional.empty() );
         assertThat( controller.update( 20L, typeTwenty )).isEqualTo( expected );
