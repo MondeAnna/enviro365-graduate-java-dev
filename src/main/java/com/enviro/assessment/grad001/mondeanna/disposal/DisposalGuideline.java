@@ -33,10 +33,8 @@ public class DisposalGuideline {
         private String wasteCategory;
 
         @NotBlank
-        @Column( unique = true )
         private String description;
 
         @NotBlank
-        @Column( unique = true )
         private String landfill;
 }
