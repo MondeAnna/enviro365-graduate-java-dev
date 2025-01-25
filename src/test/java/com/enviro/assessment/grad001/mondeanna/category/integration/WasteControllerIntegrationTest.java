@@ -80,10 +80,11 @@ public class WasteControllerIntegrationTest {
                 .andReturn().getResponse();
 
         List<WasteCategory> responseRepository = deserializeRepository( response );
+        String expectedDescription = "(LCT1 < LC <= LCT2 or TC <= TCT1)";
 
         assertThat( responseRepository.get( 0 ).getId() ).isEqualTo( 1 );
         assertThat( responseRepository.get( 1 ).getName() ).isEqualTo( "Type 1" );
-        assertThat( responseRepository.get( 2 ).getDescription() ).contains( "(LCT1 < LC <= LCT2 or TC <= TCT1)" );
+        assertThat( responseRepository.get( 2 ).getDescription() ).contains( expectedDescription );
     }
 
     @Test
@@ -93,10 +94,11 @@ public class WasteControllerIntegrationTest {
                 .andReturn().getResponse();
 
         WasteCategory category = deserializeWasteCategory( response );
+        String expectedDescription = "(LCT0 < LC <= LCT1 or TC <= TCT1)";
 
         assertThat( category.getId() ).isEqualTo( 4 );
         assertThat( category.getName() ).isEqualTo( "Type 3");
-        assertThat( category.getDescription() ).contains( "(LCT0 < LC <= LCT1 or TC <= TCT1)" );
+        assertThat( category.getDescription() ).contains( expectedDescription );
     }
 
     @Test
@@ -202,11 +204,13 @@ public class WasteControllerIntegrationTest {
             .andExpect( status().isBadRequest() );
     }
 
-    private List<WasteCategory> deserializeRepository(MockHttpServletResponse response ) throws UnsupportedEncodingException, JsonProcessingException {
+    private List<WasteCategory> deserializeRepository(MockHttpServletResponse response )
+            throws UnsupportedEncodingException, JsonProcessingException {
         return objectMapper.readValue( response.getContentAsString(), new TypeReference<>(){} );
     }
 
-    private WasteCategory deserializeWasteCategory(MockHttpServletResponse response ) throws UnsupportedEncodingException, JsonProcessingException {
+    private WasteCategory deserializeWasteCategory(MockHttpServletResponse response )
+            throws UnsupportedEncodingException, JsonProcessingException {
         return objectMapper.readValue( response.getContentAsString(), WasteCategory.class );
     }
 }
