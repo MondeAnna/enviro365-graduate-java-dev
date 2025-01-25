@@ -1,11 +1,11 @@
-package com.enviro.assessment.grad001.mondeanna.waste;
+package com.enviro.assessment.grad001.mondeanna.category;
 
 import java.util.List;
 
 public class TestData {
 
-    public static Category typeTwo(){
-        return Category.builder()
+    public static WasteCategory typeTwo(){
+        return WasteCategory.builder()
                 .id( 2L )
                 .name( "Type2" )
                 .description("""
@@ -15,8 +15,8 @@ public class TestData {
                 .build();
     }
 
-    public static Category typeTwenty(){
-        return Category.builder()
+    public static WasteCategory typeTwenty(){
+        return WasteCategory.builder()
                 .id( 20L )
                 .name( "Type20" )
                 .description("""
@@ -26,7 +26,7 @@ public class TestData {
                 .build();
     }
 
-    public static List<Category> mockCategoryRepo(){
+    public static List<WasteCategory> mockWasteCategoryRepo(){
         return List.of( typeTwo(), typeTwenty() );
     }
 }

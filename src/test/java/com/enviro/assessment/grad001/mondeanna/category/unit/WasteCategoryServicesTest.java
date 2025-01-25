@@ -1,9 +1,9 @@
-package com.enviro.assessment.grad001.mondeanna.waste.unit;
+package com.enviro.assessment.grad001.mondeanna.category.unit;
 
-import com.enviro.assessment.grad001.mondeanna.waste.Category;
-import com.enviro.assessment.grad001.mondeanna.waste.CategoryRepository;
-import com.enviro.assessment.grad001.mondeanna.waste.CategoryServices;
-import com.enviro.assessment.grad001.mondeanna.waste.TestData;
+import com.enviro.assessment.grad001.mondeanna.category.WasteCategory;
+import com.enviro.assessment.grad001.mondeanna.category.WasteCategoryRepository;
+import com.enviro.assessment.grad001.mondeanna.category.WasteCategoryServices;
+import com.enviro.assessment.grad001.mondeanna.category.TestData;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -18,15 +18,15 @@ import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
-public class CategoryServicesTest {
+public class WasteCategoryServicesTest {
 
     @Mock
-    private CategoryRepository repository;
+    private WasteCategoryRepository repository;
 
     @InjectMocks
-    private CategoryServices service;
+    private WasteCategoryServices service;
 
-    private final List<Category> mockRepo = TestData.mockCategoryRepo();
+    private final List<WasteCategory> mockRepo = TestData.mockWasteCategoryRepo();
 
     @Test
     public void testFindAll(){
@@ -36,22 +36,22 @@ public class CategoryServicesTest {
 
     @Test
     public void testFindById(){
-        Category typeTwo = TestData.typeTwo();
+        WasteCategory typeTwo = TestData.typeTwo();
         Mockito.when( repository.findById( 2L )).thenReturn( Optional.of( typeTwo ));
         assertThat( service.findById( 2L )).isEqualTo( Optional.of( typeTwo ));
     }
 
     @Test
     public void testSave(){
-        Category typeTwenty = TestData.typeTwenty();
+        WasteCategory typeTwenty = TestData.typeTwenty();
         Mockito.when( repository.save( typeTwenty )).thenReturn( typeTwenty );
         assertThat( service.save( typeTwenty )).isEqualTo( typeTwenty );
     }
 
     @Test
     public void testUpdate(){
-        Category typeTwo = TestData.typeTwo();
-        Category updated = TestData.typeTwo();
+        WasteCategory typeTwo = TestData.typeTwo();
+        WasteCategory updated = TestData.typeTwo();
 
         updated.setName( "updated name" );
         updated.setDescription( "updated description" );
@@ -63,7 +63,7 @@ public class CategoryServicesTest {
 
     @Test
     public void testUpdateWithInvalidArgs(){
-        Category typeTwo = TestData.typeTwo();
+        WasteCategory typeTwo = TestData.typeTwo();
         Mockito.when( repository.existsById( 200L )).thenReturn( false );
         assertThat( service.update( 200L, typeTwo )).isEqualTo( Optional.empty() );
     }

@@ -1,4 +1,4 @@
-package com.enviro.assessment.grad001.mondeanna.waste;
+package com.enviro.assessment.grad001.mondeanna.category;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table( name = "categories" )
-public class Category {
+public class WasteCategory {
 
         @Id
         @GeneratedValue( strategy = GenerationType.IDENTITY )

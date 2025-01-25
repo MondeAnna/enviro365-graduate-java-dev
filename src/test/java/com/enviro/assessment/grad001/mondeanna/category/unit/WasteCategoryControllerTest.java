@@ -1,6 +1,6 @@
-package com.enviro.assessment.grad001.mondeanna.waste.unit;
+package com.enviro.assessment.grad001.mondeanna.category.unit;
 
-import com.enviro.assessment.grad001.mondeanna.waste.*;
+import com.enviro.assessment.grad001.mondeanna.category.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -19,17 +19,17 @@ import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
-public class CategoryControllerTest {
+public class WasteCategoryControllerTest {
 
     @Mock
-    private CategoryServices services;
+    private WasteCategoryServices services;
 
     @InjectMocks
-    private CategoryController controller;
+    private WasteCategoryController controller;
 
-    private final List<Category> mockRepo = TestData.mockCategoryRepo();
-    private final Category typeTwo = TestData.typeTwo();
-    private final Category typeTwenty = TestData.typeTwenty();
+    private final List<WasteCategory> mockRepo = TestData.mockWasteCategoryRepo();
+    private final WasteCategory typeTwo = TestData.typeTwo();
+    private final WasteCategory typeTwenty = TestData.typeTwenty();
 
     @Test
     public void testSave(){
@@ -60,7 +60,7 @@ public class CategoryControllerTest {
 
     @Test
     public void testUpdate(){
-        Category updated = TestData.typeTwo();
+        WasteCategory updated = TestData.typeTwo();
 
         updated.setName( "updated name" );
         updated.setDescription( "updated description" );
@@ -71,7 +71,7 @@ public class CategoryControllerTest {
 
     @Test
     public void testUpdateWithInvalidArgs(){
-        ResponseEntity<Category> expected = ResponseEntity.badRequest().build();
+        ResponseEntity<WasteCategory> expected = ResponseEntity.badRequest().build();
 
         Mockito.when( services.update( anyLong(), any() )).thenReturn( Optional.empty() );
         assertThat( controller.update( 20L, typeTwenty )).isEqualTo( expected );
@@ -86,7 +86,7 @@ public class CategoryControllerTest {
 
     @Test
     public void testDelete(){
-        ResponseEntity<String> expected = ResponseEntity.ok().body( "Category ID of 20 deleted" );
+        ResponseEntity<String> expected = ResponseEntity.ok().body( "Waste Category ID of 20 deleted" );
         Mockito.when( services.delete( 20L )).thenReturn( true );
         assertThat( controller.delete( 20L )).isEqualTo( expected );
     }

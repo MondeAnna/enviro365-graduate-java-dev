@@ -1,6 +1,6 @@
-package com.enviro.assessment.grad001.mondeanna.waste.integration;
+package com.enviro.assessment.grad001.mondeanna.category.integration;
 
-import com.enviro.assessment.grad001.mondeanna.waste.Category;
+import com.enviro.assessment.grad001.mondeanna.category.WasteCategory;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -55,7 +55,7 @@ public class ControllerIntegrationTest {
         assertThat( response.getContentAsString() ).contains( "id" );
         assertThat( response.getContentAsString() ).contains( json );
 
-        Category typeTen = deserializeCategory( response );
+        WasteCategory typeTen = deserializeWasteCategory( response );
 
         assertThat( response.getStatus() ).isEqualTo( HttpStatus.CREATED.value() );
         assertThat( typeTen.getName() ).isEqualTo( "Type 10" );
@@ -68,7 +68,7 @@ public class ControllerIntegrationTest {
                 .andExpect( status().isOk() )
                 .andReturn().getResponse();
 
-        List<Category> responseRepository = deserializeRepository( response );
+        List<WasteCategory> responseRepository = deserializeRepository( response );
 
         assertThat( responseRepository.get( 0 ).getId() ).isEqualTo( 1 );
         assertThat( responseRepository.get( 1 ).getName() ).isEqualTo( "Type 1" );
@@ -81,7 +81,7 @@ public class ControllerIntegrationTest {
                 .andExpect( status().isOk() )
                 .andReturn().getResponse();
 
-        Category category = deserializeCategory( response );
+        WasteCategory category = deserializeWasteCategory( response );
 
         assertThat( category.getId() ).isEqualTo( 4 );
         assertThat( category.getName() ).isEqualTo( "Type 3");
@@ -100,11 +100,11 @@ public class ControllerIntegrationTest {
                 .contains( String.format( "'path': '%s/4000'", requestMapping ));
     }
 
-    private List<Category> deserializeRepository(MockHttpServletResponse response ) throws UnsupportedEncodingException, JsonProcessingException {
+    private List<WasteCategory> deserializeRepository(MockHttpServletResponse response ) throws UnsupportedEncodingException, JsonProcessingException {
         return objectMapper.readValue( response.getContentAsString(), new TypeReference<>(){} );
     }
 
-    private Category deserializeCategory(MockHttpServletResponse response ) throws UnsupportedEncodingException, JsonProcessingException {
-        return objectMapper.readValue( response.getContentAsString(), Category.class );
+    private WasteCategory deserializeWasteCategory(MockHttpServletResponse response ) throws UnsupportedEncodingException, JsonProcessingException {
+        return objectMapper.readValue( response.getContentAsString(), WasteCategory.class );
     }
 }
