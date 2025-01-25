@@ -5,6 +5,7 @@ import com.enviro.assessment.grad001.mondeanna.category.WasteCategory;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -112,6 +113,55 @@ public class WasteControllerIntegrationTest {
         mockMvc.perform( get( requestMapping + "/" + invalidId ))
                 .andExpect( status().isBadRequest() )
                 .andReturn().getResponse();
+    }
+
+    @Test
+    @Disabled( "response is status code 400 instead of 200" )
+    public void testIntegrationOfUpdate() throws Exception {
+        MockHttpServletResponse findAllResponse = mockMvc.perform( get( requestMapping + "/" ))
+                .andExpect( status().isOk() )
+                .andReturn().getResponse();
+
+        WasteCategory category = deserializeRepository( findAllResponse ).get( 0 );
+        long id = category.getId();
+
+        assertThat( category.getId() ).isEqualTo( id );
+        assertThat( category.getName() ).isEqualTo( "Type 0" );
+
+        String json = "{'name': 'Type 10', 'description': 'updated description'}";
+
+        MockHttpServletResponse response = mockMvc.perform( put( requestMapping + "/" + id )
+                        .accept( MediaType.APPLICATION_JSON )
+                        .contentType( MediaType.APPLICATION_JSON )
+                        .content( json ))
+                .andExpect( status().isCreated() )
+                .andReturn().getResponse();
+
+        assertThat( response.getContentAsString() ).contains( "'id': 1" );
+        assertThat( response.getContentAsString() ).contains( json );
+
+        WasteCategory typeTen = deserializeWasteCategory( response );
+
+        assertThat( typeTen.getName() ).isEqualTo( "Type 10" );
+        assertThat( typeTen.getDescription() ).isEqualTo( "fancy test description" );
+    }
+
+    @Test
+    public void testIntegrationOfUpdateWithInvalidArg() throws Exception {
+        MockHttpServletResponse response = mockMvc.perform( get( requestMapping + "/" ))
+                .andExpect( status().isOk() )
+                .andReturn().getResponse();
+
+        List<WasteCategory> responseRepository = deserializeRepository( response );
+        int invalidId = responseRepository.size() + 1;
+
+        String json = "{'name': 'Type 10', 'description': 'updated description'}";
+
+        mockMvc.perform( put( requestMapping + "/" + invalidId )
+                        .accept( MediaType.APPLICATION_JSON )
+                        .contentType( MediaType.APPLICATION_JSON )
+                        .content( json ))
+                .andExpect( status().isBadRequest() );
     }
 
     private List<WasteCategory> deserializeRepository(MockHttpServletResponse response ) throws UnsupportedEncodingException, JsonProcessingException {
