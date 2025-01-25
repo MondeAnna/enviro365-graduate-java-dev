@@ -65,6 +65,8 @@ public class WasteCategoryControllerTest {
         updated.setName( "updated name" );
         updated.setDescription( "updated description" );
 
+        assertThat( typeTwo ).isNotEqualTo( updated );
+
         Mockito.when( services.update( 2L, typeTwo )).thenReturn( Optional.of( updated ));
         assertThat( controller.update( 2L, typeTwo )).isEqualTo( ResponseEntity.ok( updated ));
     }

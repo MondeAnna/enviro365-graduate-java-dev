@@ -56,6 +56,8 @@ public class WasteCategoryServicesTest {
         updated.setName( "updated name" );
         updated.setDescription( "updated description" );
 
+        assertThat( typeTwo ).isNotEqualTo( updated );
+
         Mockito.when( repository.existsById( 2L )).thenReturn( true );
         Mockito.when( repository.save( typeTwo )).thenReturn( updated );
         assertThat( service.update( 2L, typeTwo )).isEqualTo( Optional.of( updated ));
