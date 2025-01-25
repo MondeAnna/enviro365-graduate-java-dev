@@ -30,7 +30,7 @@ import java.util.List;
 @AutoConfigureMockMvc
 @SpringBootTest( webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT )
 @DirtiesContext( classMode = ClassMode.BEFORE_EACH_TEST_METHOD )
-public class ControllerIntegrationTest {
+public class WasteControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -60,6 +60,18 @@ public class ControllerIntegrationTest {
         assertThat( response.getStatus() ).isEqualTo( HttpStatus.CREATED.value() );
         assertThat( typeTen.getName() ).isEqualTo( "Type 10" );
         assertThat( typeTen.getDescription() ).isEqualTo( "fancy test description" );
+    }
+
+    @Test
+    public void testIntegrationOfSaveWithInvalidArgs() throws Exception {
+        String json = "{'id': 10, 'name': 'Type 10', 'description': 'description'}";
+
+        mockMvc.perform( post( requestMapping + "/" )
+                        .accept( MediaType.APPLICATION_JSON )
+                        .contentType( MediaType.APPLICATION_JSON )
+                        .content( json ))
+                .andExpect( status().isBadRequest() )
+                .andReturn().getResponse();
     }
 
     @Test
