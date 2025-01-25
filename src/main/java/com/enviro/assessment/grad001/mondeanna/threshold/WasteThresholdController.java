@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping( path = "/api/v1/thresholds" )
+@RequestMapping( path = "/api/v1/waste-thresholds" )
 public class WasteThresholdController {
 
     private final WasteThresholdRepository repository;
