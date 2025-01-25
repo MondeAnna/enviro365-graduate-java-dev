@@ -1,7 +1,5 @@
 package com.enviro.assessment.grad001.mondeanna.disposal;
 
-import java.util.List;
-
 public class TestData {
 
     public static DisposalGuideline validClassification(){
@@ -41,31 +39,12 @@ public class TestData {
                 .build();
     }
 
-    /* temporarily unused
-    public static DisposalGuideline typeTwo(){
+    public static DisposalGuideline blankLandfill() {
         return DisposalGuideline.builder()
-                .id( 2L )
-                .name( "Type2" )
-                .description("""
-                        leachable concentration between 1 and 2 as well as \
-                        total concentration less that level 1 is type 2
-                        """ )
+                .classification( "D" )
+                .description( "description" )
+                .wasteCategory( "category" )
+                .landfill( "" )
                 .build();
     }
-
-    public static DisposalGuideline typeTwenty(){
-        return DisposalGuideline.builder()
-                .id( 20L )
-                .name( "Type20" )
-                .description("""
-                        wastes with element or chemical substances \
-                        concentration above level waste type 20
-                        """ )
-                .build();
-    }
-
-    public static List<DisposalGuideline> mockDisposalGuidelineRepo(){
-        return List.of( typeTwo(), typeTwenty() );
-    }
-    */
 }

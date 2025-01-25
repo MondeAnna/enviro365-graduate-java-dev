@@ -61,7 +61,7 @@ public class DisposalGuidelineTest {
 
     @Test
     public void testInvalidDescription(){
-        guideline = TestData.blankDescription();
+        guideline = TestData.blankLandfill();
 
         Set<ConstraintViolation<DisposalGuideline>> violations = validator.validate( guideline );
         List<String> messages = violations.stream().map( ConstraintViolation::getMessage ).toList();
