@@ -58,4 +58,14 @@ public class DisposalGuidelineTest {
 
         assertThat( messages ).isEqualTo( List.of( "must not be blank" ));
     }
+
+    @Test
+    public void testInvalidDescription(){
+        guideline = TestData.blankDescription();
+
+        Set<ConstraintViolation<DisposalGuideline>> violations = validator.validate( guideline );
+        List<String> messages = violations.stream().map( ConstraintViolation::getMessage ).toList();
+
+        assertThat( messages ).isEqualTo( List.of( "must not be blank" ));
+    }
 }

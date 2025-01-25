@@ -32,6 +32,15 @@ public class TestData {
                 .build();
     }
 
+    public static DisposalGuideline blankDescription() {
+        return DisposalGuideline.builder()
+                .classification( "C" )
+                .description( "" )
+                .wasteCategory( "category" )
+                .landfill( "landfill shorthand" )
+                .build();
+    }
+
     /* temporarily unused
     public static DisposalGuideline typeTwo(){
         return DisposalGuideline.builder()
