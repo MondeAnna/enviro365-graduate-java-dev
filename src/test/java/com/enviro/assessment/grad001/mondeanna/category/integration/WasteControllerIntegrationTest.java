@@ -189,6 +189,19 @@ public class WasteControllerIntegrationTest {
             assertThat( secondRepoSize ).isEqualTo( firstRepoSize );
     }
 
+    @Test
+    public void testIntegrationOfDeleteWithInvalidArg() throws Exception {
+        MockHttpServletResponse response = mockMvc.perform( get( requestMapping + "/" ))
+                .andExpect( status().isOk() )
+                .andReturn().getResponse();
+
+        long repoSize = deserializeRepository( response ).size();
+        long InvalidId = repoSize + 1;
+
+        mockMvc.perform( delete( requestMapping + "/" + InvalidId ))
+            .andExpect( status().isBadRequest() );
+    }
+
     private List<WasteCategory> deserializeRepository(MockHttpServletResponse response ) throws UnsupportedEncodingException, JsonProcessingException {
         return objectMapper.readValue( response.getContentAsString(), new TypeReference<>(){} );
     }
