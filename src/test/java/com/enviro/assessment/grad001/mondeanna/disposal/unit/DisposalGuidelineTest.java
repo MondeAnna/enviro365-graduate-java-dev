@@ -19,6 +19,7 @@ import java.util.Set;
 @SpringBootTest
 public class DisposalGuidelineTest {
 
+    private DisposalGuideline guideline;
     private Validator validator;
 
     @BeforeEach
@@ -28,23 +29,33 @@ public class DisposalGuidelineTest {
 
     @Test
     public void testClassClassificationValue(){
-        DisposalGuideline validClassification = TestData.validClassification();
+        guideline = TestData.validClassification();
 
-        assertThat( validClassification.getId() ).isEqualTo( 1 );
-        assertThat( validClassification.getClassification() ).isEqualTo( "A" );
-        assertThat( validClassification.getDescription() ).isEqualTo( "a long description" );
-        assertThat( validClassification.getWasteCategory() ).isEqualTo( "waste category" );
-        assertThat( validClassification.getLandfill() ).isEqualTo( "landfill shorthand" );
+        assertThat( guideline.getId() ).isEqualTo( 1 );
+        assertThat( guideline.getClassification() ).isEqualTo( "A" );
+        assertThat( guideline.getDescription() ).isEqualTo( "a long description" );
+        assertThat( guideline.getWasteCategory() ).isEqualTo( "waste category" );
+        assertThat( guideline.getLandfill() ).isEqualTo( "landfill shorthand" );
     }
 
     @Test
     public void testInvalidClassification(){
-        DisposalGuideline blankDescription = TestData.blankClassification();
+        guideline = TestData.blankClassification();
 
-        Set<ConstraintViolation<DisposalGuideline>> violations = validator.validate( blankDescription );
+        Set<ConstraintViolation<DisposalGuideline>> violations = validator.validate( guideline );
         List<String> messages = violations.stream().map( ConstraintViolation::getMessage ).toList();
 
         for ( String message : List.of( "Allowed: 'A', 'B', 'C' or 'D'", "must not be blank" ))
             assertThat( messages.contains( message )).isTrue();
+    }
+
+    @Test
+    public void testInvalidWasteCategory(){
+        guideline = TestData.blankWasteCategory();
+
+        Set<ConstraintViolation<DisposalGuideline>> violations = validator.validate( guideline );
+        List<String> messages = violations.stream().map( ConstraintViolation::getMessage ).toList();
+
+        assertThat( messages ).isEqualTo( List.of( "must not be blank" ));
     }
 }

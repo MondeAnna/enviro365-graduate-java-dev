@@ -23,6 +23,15 @@ public class TestData {
                 .build();
     }
 
+    public static DisposalGuideline blankWasteCategory() {
+        return DisposalGuideline.builder()
+                .classification( "B" )
+                .description( "description" )
+                .wasteCategory( "" )
+                .landfill( "landfill shorthand" )
+                .build();
+    }
+
     /* temporarily unused
     public static DisposalGuideline typeTwo(){
         return DisposalGuideline.builder()
