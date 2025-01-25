@@ -1,5 +1,7 @@
 package com.enviro.assessment.grad001.mondeanna.disposal;
 
+import java.util.List;
+
 public class TestData {
 
     public static DisposalGuideline validClassification(){
@@ -46,5 +48,9 @@ public class TestData {
                 .wasteCategory( "category" )
                 .landfill( "" )
                 .build();
+    }
+
+    public static List<DisposalGuideline> mockDisposalGuidelineRepo(){
+        return List.of( validClassification() );
     }
 }

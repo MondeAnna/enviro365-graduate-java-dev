@@ -20,7 +20,6 @@ import java.util.Optional;
 @SpringBootTest
 public class DisposalGuidelineServicesTest {
 
-    /* temporarily unused
     @Mock
     private DisposalGuidelineRepository repository;
 
@@ -28,6 +27,7 @@ public class DisposalGuidelineServicesTest {
     private DisposalGuidelineServices service;
 
     private final List<DisposalGuideline> mockRepo = TestData.mockDisposalGuidelineRepo();
+    private final DisposalGuideline guideline = TestData.validClassification();
 
     @Test
     public void testFindAll(){
@@ -37,36 +37,34 @@ public class DisposalGuidelineServicesTest {
 
     @Test
     public void testFindById(){
-        DisposalGuideline typeTwo = TestData.typeTwo();
-        Mockito.when( repository.findById( 2L )).thenReturn( Optional.of( typeTwo ));
-        assertThat( service.findById( 2L )).isEqualTo( Optional.of( typeTwo ));
+        Mockito.when( repository.findById( 2L )).thenReturn( Optional.of( guideline ));
+        assertThat( service.findById( 2L )).isEqualTo( Optional.of( guideline ));
     }
 
     @Test
     public void testSave(){
-        DisposalGuideline typeTwenty = TestData.typeTwenty();
-        Mockito.when( repository.save( typeTwenty )).thenReturn( typeTwenty );
-        assertThat( service.save( typeTwenty )).isEqualTo( typeTwenty );
+        Mockito.when( repository.save( guideline )).thenReturn( guideline );
+        assertThat( service.save( guideline )).isEqualTo( guideline );
     }
 
     @Test
     public void testUpdate(){
-        DisposalGuideline typeTwo = TestData.typeTwo();
-        DisposalGuideline updated = TestData.typeTwo();
+        DisposalGuideline updated = TestData.validClassification();
 
-        updated.setName( "updated name" );
+        updated.setClassification( "updated classification" );
         updated.setDescription( "updated description" );
+        updated.setWasteCategory( "updated waste category" );
+        updated.setLandfill( "updated landfill" );
 
         Mockito.when( repository.existsById( 2L )).thenReturn( true );
-        Mockito.when( repository.save( typeTwo )).thenReturn( updated );
-        assertThat( service.update( 2L, typeTwo )).isEqualTo( Optional.of( updated ));
+        Mockito.when( repository.save( guideline )).thenReturn( updated );
+        assertThat( service.update( 2L, guideline )).isEqualTo( Optional.of( updated ));
     }
 
     @Test
     public void testUpdateWithInvalidArgs(){
-        DisposalGuideline typeTwo = TestData.typeTwo();
         Mockito.when( repository.existsById( 200L )).thenReturn( false );
-        assertThat( service.update( 200L, typeTwo )).isEqualTo( Optional.empty() );
+        assertThat( service.update( 200L, guideline )).isEqualTo( Optional.empty() );
     }
 
     @Test
@@ -80,5 +78,4 @@ public class DisposalGuidelineServicesTest {
         Mockito.when( repository.existsById( 1000L )).thenReturn( false );
         assertThat( service.delete( 1000L )).isEqualTo( false );
     }
-    */
 }
