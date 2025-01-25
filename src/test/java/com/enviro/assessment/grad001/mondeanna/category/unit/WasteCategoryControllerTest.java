@@ -55,7 +55,7 @@ public class WasteCategoryControllerTest {
     @Test
     public void testFindByIdWithInvalidArg(){
         Mockito.when( services.findById( anyLong() )).thenReturn( Optional.empty() );
-        assertThat( controller.findById( 2L )).isEqualTo( ResponseEntity.notFound().build() );
+        assertThat( controller.findById( 2L )).isEqualTo( ResponseEntity.badRequest().build() );
     }
 
     @Test

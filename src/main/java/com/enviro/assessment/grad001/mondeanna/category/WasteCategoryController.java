@@ -37,7 +37,7 @@ public class WasteCategoryController {
     @GetMapping( path = "/{id}" )
     public ResponseEntity<WasteCategory> findById( @Valid @PathVariable long id ){
         Optional<WasteCategory> optional = services.findById( id );
-        return optional.map( ResponseEntity::ok ).orElseGet( () -> ResponseEntity.notFound().build() );
+        return optional.map( ResponseEntity::ok ).orElseGet( () -> ResponseEntity.badRequest().build() );
     }
 
     @PutMapping( path = "/{id}" )

@@ -101,15 +101,17 @@ public class WasteControllerIntegrationTest {
     }
 
     @Test
-    @Disabled( "need apply a filtering service" )
     public void testIntegrationOfFindByIdWithInvalidArgs() throws Exception {
-        MockHttpServletResponse response = mockMvc.perform( get( requestMapping + "/4000" ))
-                .andExpect( status().isNotFound() )
+        MockHttpServletResponse response = mockMvc.perform( get( requestMapping + "/" ))
+                .andExpect( status().isOk() )
                 .andReturn().getResponse();
 
-        assertThat( response.getContentAsString() ).contains( "'status': 404" );
-        assertThat( response.getContentAsString() )
-                .contains( String.format( "'path': '%s/4000'", requestMapping ));
+        List<WasteCategory> responseRepository = deserializeRepository( response );
+        int invalidId = responseRepository.size() + 1;
+
+        mockMvc.perform( get( requestMapping + "/" + invalidId ))
+                .andExpect( status().isBadRequest() )
+                .andReturn().getResponse();
     }
 
     private List<WasteCategory> deserializeRepository(MockHttpServletResponse response ) throws UnsupportedEncodingException, JsonProcessingException {
