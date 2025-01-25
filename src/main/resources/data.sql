@@ -115,3 +115,30 @@ VALUES
                     'and all pesticides=0.05 ' ||
                     'are Type 4 Wastes' )
 ;
+
+INSERT INTO disposal_guidelines
+    ( classification, waste_category, description, landfill )
+
+VALUES
+    ( 'A', 'Type 1', 'High risk waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'Hh/HH' ),
+    ( 'B', 'Type 2', 'Moderate risk waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'GLB+' ),
+    ( 'C', 'Type 3', 'Low risk waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'GLB+' ),
+    ( 'D', 'Type 4', 'Inert waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'GLB-' ),
+
+    ( 'B', 'domestic waste', 'Moderate risk waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'GLB+' ),
+    ( 'B', 'business waste with hazardous substances', 'Moderate risk waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'GLB+' ),
+    ( 'B', 'non-infectious animal carcasses', 'Moderate risk waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'GLB+' ),
+    ( 'B', 'garden waste', 'Moderate risk waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'GLB+' ),
+
+    ( 'C', 'post-consumer packaging', 'Low risk waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'GLB+' ),
+    ( 'C', 'waste tyres', 'Low risk waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'GLB+' ),
+
+    ( 'D', 'business waste without hazardous substances', 'Inert waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'GLB-' ),
+    ( 'D', 'excavated earth material without hazardous substances', 'Inert waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'GLB-' ),
+
+    ( 'A', 'asbestose waste', 'High risk waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'Hh/hh' ),
+    ( 'A', 'expired, spoilt or unusable hazardous products', 'High risk waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'Hh/HH' ),
+    ( 'A', 'PCBs containing was (>50 ppm)', 'High risk waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'Hh/hh' ),
+    ( 'A', 'general waste, excluding domestic waste, containing hazardous substances', 'High risk waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'Hh/hh' ),
+    ( 'A', 'mixed hazardous substances from analytics laboratories and academic institution libraries in containers less than 100 litres', 'High risk waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'Hh/hh' )
+;
