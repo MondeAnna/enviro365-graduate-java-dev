@@ -3,9 +3,7 @@ package com.enviro.assessment.grad001.mondeanna.category.integration;
 import com.enviro.assessment.grad001.mondeanna.category.WasteCategory;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -162,6 +160,33 @@ public class WasteControllerIntegrationTest {
                         .contentType( MediaType.APPLICATION_JSON )
                         .content( json ))
                 .andExpect( status().isBadRequest() );
+    }
+
+    @Test
+    public void testIntegrationOfDelete() throws Exception {
+        MockHttpServletResponse firstResponse = mockMvc.perform( get( requestMapping + "/" ))
+                .andExpect( status().isOk() )
+                .andReturn().getResponse();
+
+        long firstRepoSize = deserializeRepository( firstResponse ).size();
+        long validId = firstRepoSize == 0 ? -1 :firstRepoSize - 1;
+
+        /* presently unable to guarantee state of repository */
+        if ( validId >= 0 ) {
+            mockMvc.perform( delete( requestMapping + "/" + validId ))
+                .andExpect( status().isOk() );
+        }
+
+        MockHttpServletResponse secondResponse = mockMvc.perform( get( requestMapping + "/" ))
+                .andExpect( status().isOk() )
+                .andReturn().getResponse();
+
+        long secondRepoSize = deserializeRepository( secondResponse ).size();
+
+        if ( validId >= 0 )
+            assertThat( secondRepoSize ).isEqualTo( firstRepoSize - 1);
+        else
+            assertThat( secondRepoSize ).isEqualTo( firstRepoSize );
     }
 
     private List<WasteCategory> deserializeRepository(MockHttpServletResponse response ) throws UnsupportedEncodingException, JsonProcessingException {
