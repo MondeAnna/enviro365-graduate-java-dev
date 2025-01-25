@@ -1,6 +1,4 @@
-package com.enviro.assessment.grad001.mondeanna.category;
-
-import com.enviro.assessment.grad001.mondeanna.disposal.DisposalGuideline;
+package com.enviro.assessment.grad001.mondeanna.disposal;
 
 import java.util.List;
 
@@ -28,7 +26,7 @@ public class TestData {
                 .build();
     }
 
-    public static List<DisposalGuideline> mockWasteCategoryRepo(){
+    public static List<DisposalGuideline> mockDisposalGuidelineRepo(){
         return List.of( typeTwo(), typeTwenty() );
     }
 }

@@ -1,4 +1,4 @@
-package com.enviro.assessment.grad001.mondeanna.category.unit;
+package com.enviro.assessment.grad001.mondeanna.disposal.unit;
 
 import com.enviro.assessment.grad001.mondeanna.category.TestData;
 import com.enviro.assessment.grad001.mondeanna.disposal.DisposalGuideline;
@@ -10,7 +10,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
 @SpringBootTest
-public class WasteCategoryTest {
+public class DisposalGuidelineTest {
 
     @Test
     void testInstanceConstruction(){

@@ -1,4 +1,4 @@
-package com.enviro.assessment.grad001.mondeanna.category;
+package com.enviro.assessment.grad001.mondeanna.disposal;
 
 import jakarta.validation.Valid;
 
@@ -11,38 +11,38 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping( path = "/api/v1/waste-categories" )
-public class WasteCategoryController {
+@RequestMapping( path = "/api/v1/disposal-guidelines" )
+public class DisposalGuidelineController {
 
-    private final WasteCategoryServices services;
+    private final DisposalGuidelineServices services;
 
     @Autowired
-    public WasteCategoryController( WasteCategoryServices services ){
+    public DisposalGuidelineController( DisposalGuidelineServices services ){
         this.services = services;
     }
 
     @PostMapping( path = "/" )
-    public ResponseEntity<WasteCategory> save( @Valid @RequestBody WasteCategory category ){
-        WasteCategory saved = services.save( category );
+    public ResponseEntity<DisposalGuideline> save( @Valid @RequestBody DisposalGuideline guideline ){
+        DisposalGuideline saved = services.save( guideline );
         String path = getFinalRequestPath( this, saved );
         URI uri = URI.create( path );
         return ResponseEntity.created( uri ).build();
     }
 
     @GetMapping( path = "/" )
-    public ResponseEntity<List<WasteCategory>> findAll(){
+    public ResponseEntity<List<DisposalGuideline>> findAll() {
         return ResponseEntity.ok( services.findAll() );
     }
 
     @GetMapping( path = "/{id}" )
-    public ResponseEntity<WasteCategory> findById( @Valid @PathVariable long id ){
-        Optional<WasteCategory> optional = services.findById( id );
+    public ResponseEntity<DisposalGuideline> findById( @Valid @PathVariable long id ){
+        Optional<DisposalGuideline> optional = services.findById( id );
         return optional.map( ResponseEntity::ok ).orElseGet( () -> ResponseEntity.badRequest().build() );
     }
 
     @PutMapping( path = "/{id}" )
-    public ResponseEntity<WasteCategory> update( @Valid @PathVariable long id, @Valid @RequestBody WasteCategory category ){
-        Optional<WasteCategory> optional = services.update( id, category );
+    public ResponseEntity<DisposalGuideline> update( @Valid @PathVariable long id, @Valid @RequestBody DisposalGuideline guideline ){
+        Optional<DisposalGuideline> optional = services.update( id, guideline );
         return optional.map( ResponseEntity::ok ).orElseGet( () -> ResponseEntity.badRequest().build() );
     }
 
@@ -50,11 +50,11 @@ public class WasteCategoryController {
     public ResponseEntity<String> delete( @Valid @PathVariable long id ){
         if ( !services.delete( id ))
             return ResponseEntity.badRequest( ).body( "Invalid Argument" );
-        return ResponseEntity.ok().body( String.format( "Waste Category ID of %d deleted", id ));
+        return ResponseEntity.ok().body( String.format( "Disposal Guideline ID of %d deleted", id ));
     }
 
-    public String getFinalRequestPath( WasteCategoryController controller, WasteCategory category ){
+    public String getFinalRequestPath( DisposalGuidelineController controller, DisposalGuideline guideline ){
         String base = controller.getClass().getAnnotation( RequestMapping.class ).path()[0];
-        return base + "/" + category.getId();
+        return base + "/" + guideline.getId();
     }
 }

@@ -1,6 +1,6 @@
-package com.enviro.assessment.grad001.mondeanna.category.unit;
+package com.enviro.assessment.grad001.mondeanna.disposal.unit;
 
-import com.enviro.assessment.grad001.mondeanna.category.*;
+import com.enviro.assessment.grad001.mondeanna.disposal.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -20,21 +20,21 @@ import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
-public class WasteCategoryControllerTest {
+public class DisposalGuidelineControllerTest {
 
     @Mock
-    private WasteCategoryServices services;
+    private DisposalGuidelineServices services;
 
     @InjectMocks
-    private WasteCategoryController controller;
+    private DisposalGuidelineController controller;
 
-    private final List<DisposalGuideline> mockRepo = TestData.mockWasteCategoryRepo();
+    private final List<DisposalGuideline> mockRepo = TestData.mockDisposalGuidelineRepo();
     private final DisposalGuideline typeTwo = TestData.typeTwo();
     private final DisposalGuideline typeTwenty = TestData.typeTwenty();
 
     @Test
     public void testSave(){
-        URI uri = URI.create( "/api/v1/waste-categories/20" );
+        URI uri = URI.create( "/api/v1/disposal-guidelines/20" );
         ResponseEntity<URI> expected =  ResponseEntity.created( uri ).build();
 
         Mockito.when( services.save( typeTwenty )).thenReturn( typeTwenty );
@@ -87,7 +87,7 @@ public class WasteCategoryControllerTest {
 
     @Test
     public void testDelete(){
-        ResponseEntity<String> expected = ResponseEntity.ok().body( "Waste Category ID of 20 deleted" );
+        ResponseEntity<String> expected = ResponseEntity.ok().body( "Disposal Guideline ID of 20 deleted" );
         Mockito.when( services.delete( 20L )).thenReturn( true );
         assertThat( controller.delete( 20L )).isEqualTo( expected );
     }

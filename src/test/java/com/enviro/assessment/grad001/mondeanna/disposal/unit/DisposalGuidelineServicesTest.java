@@ -1,9 +1,9 @@
-package com.enviro.assessment.grad001.mondeanna.category.unit;
+package com.enviro.assessment.grad001.mondeanna.disposal.unit;
 
 import com.enviro.assessment.grad001.mondeanna.disposal.DisposalGuideline;
-import com.enviro.assessment.grad001.mondeanna.category.WasteCategoryRepository;
-import com.enviro.assessment.grad001.mondeanna.category.WasteCategoryServices;
-import com.enviro.assessment.grad001.mondeanna.category.TestData;
+import com.enviro.assessment.grad001.mondeanna.disposal.DisposalGuidelineRepository;
+import com.enviro.assessment.grad001.mondeanna.disposal.DisposalGuidelineServices;
+import com.enviro.assessment.grad001.mondeanna.disposal.TestData;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -18,15 +18,15 @@ import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
-public class WasteCategoryServicesTest {
+public class DisposalGuidelineServicesTest {
 
     @Mock
-    private WasteCategoryRepository repository;
+    private DisposalGuidelineRepository repository;
 
     @InjectMocks
-    private WasteCategoryServices service;
+    private DisposalGuidelineServices service;
 
-    private final List<DisposalGuideline> mockRepo = TestData.mockWasteCategoryRepo();
+    private final List<DisposalGuideline> mockRepo = TestData.mockDisposalGuidelineRepo();
 
     @Test
     public void testFindAll(){

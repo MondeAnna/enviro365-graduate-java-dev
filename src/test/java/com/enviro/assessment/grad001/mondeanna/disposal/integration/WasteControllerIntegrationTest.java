@@ -1,4 +1,4 @@
-package com.enviro.assessment.grad001.mondeanna.category.integration;
+package com.enviro.assessment.grad001.mondeanna.disposal.integration;
 
 import com.enviro.assessment.grad001.mondeanna.disposal.DisposalGuideline;
 
@@ -54,7 +54,7 @@ public class WasteControllerIntegrationTest {
         assertThat( response.getContentAsString() ).contains( "id" );
         assertThat( response.getContentAsString() ).contains( json );
 
-        DisposalGuideline typeTen = deserializeWasteCategory( response );
+        DisposalGuideline typeTen = deserializeDisposalGuideline( response );
 
         assertThat( response.getStatus() ).isEqualTo( HttpStatus.CREATED.value() );
         assertThat( typeTen.getName() ).isEqualTo( "Type 10" );
@@ -95,7 +95,7 @@ public class WasteControllerIntegrationTest {
                 .andExpect( status().isOk() )
                 .andReturn().getResponse();
 
-        DisposalGuideline category = deserializeWasteCategory( response );
+        DisposalGuideline category = deserializeDisposalGuideline( response );
         String expectedDescription = "(LCT0 < LC <= LCT1 or TC <= TCT1)";
 
         assertThat( category.getId() ).isEqualTo( 4 );
@@ -142,7 +142,7 @@ public class WasteControllerIntegrationTest {
         assertThat( response.getContentAsString() ).contains( "'id': 1" );
         assertThat( response.getContentAsString() ).contains( json );
 
-        DisposalGuideline typeTen = deserializeWasteCategory( response );
+        DisposalGuideline typeTen = deserializeDisposalGuideline( response );
 
         assertThat( typeTen.getName() ).isEqualTo( "Type 10" );
         assertThat( typeTen.getDescription() ).isEqualTo( "fancy test description" );
@@ -211,7 +211,7 @@ public class WasteControllerIntegrationTest {
         return objectMapper.readValue( response.getContentAsString(), new TypeReference<>(){} );
     }
 
-    private DisposalGuideline deserializeWasteCategory(MockHttpServletResponse response )
+    private DisposalGuideline deserializeDisposalGuideline(MockHttpServletResponse response )
             throws UnsupportedEncodingException, JsonProcessingException {
         return objectMapper.readValue( response.getContentAsString(), DisposalGuideline.class );
     }
