@@ -1,4 +1,4 @@
-package com.enviro.assessment.grad001.mondeanna.waste;
+package com.enviro.assessment.grad001.mondeanna.threshold;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,22 +12,22 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping( path = "/api/v1/thresholds" )
-public class ThresholdController {
+public class WasteThresholdController {
 
-    private final ThresholdRepository repository;
+    private final WasteThresholdRepository repository;
 
     @Autowired
-    public ThresholdController(ThresholdRepository repository ){
+    public WasteThresholdController( WasteThresholdRepository repository ){
         this.repository = repository;
     }
 
     @GetMapping( path = "/" )
-    public List<Threshold> findAll() {
+    public List<WasteThreshold> findAll() {
         return repository.findAll();
     }
 
     @GetMapping( path = "/{id}" )
-    public Optional<Threshold> findById( @Valid @PathVariable long id ){
+    public Optional<WasteThreshold> findById( @Valid @PathVariable long id ){
         return repository.findById( id );
     }
 }

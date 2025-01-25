@@ -1,4 +1,4 @@
-package com.enviro.assessment.grad001.mondeanna.waste;
+package com.enviro.assessment.grad001.mondeanna.threshold;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table( name = "thresholds" )
-public class Threshold {
+public class WasteThreshold {
 
         @Id
         @GeneratedValue( strategy = GenerationType.IDENTITY )

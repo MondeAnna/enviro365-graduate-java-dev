@@ -1,9 +1,9 @@
-package com.enviro.assessment.grad001.mondeanna.waste.unit;
+package com.enviro.assessment.grad001.mondeanna.threshold.unit;
 
-import com.enviro.assessment.grad001.mondeanna.waste.TestData;
-import com.enviro.assessment.grad001.mondeanna.waste.ThresholdController;
-import com.enviro.assessment.grad001.mondeanna.waste.Threshold;
-import com.enviro.assessment.grad001.mondeanna.waste.ThresholdRepository;
+import com.enviro.assessment.grad001.mondeanna.threshold.TestData;
+import com.enviro.assessment.grad001.mondeanna.threshold.WasteThresholdController;
+import com.enviro.assessment.grad001.mondeanna.threshold.WasteThreshold;
+import com.enviro.assessment.grad001.mondeanna.threshold.WasteThresholdRepository;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
@@ -17,17 +17,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 import java.util.Optional;
 
-
 @SpringBootTest
-public class ThresholdControllerTest {
+public class WasteThresholdControllerTest {
 
     @Mock
-    private ThresholdRepository repository;
+    private WasteThresholdRepository repository;
 
     @InjectMocks
-    private ThresholdController controller;
+    private WasteThresholdController controller;
 
-    private final List<Threshold> mockRepo = TestData.mockThresholdRepo();
+    private final List<WasteThreshold> mockRepo = TestData.mockWasteThresholdRepo();
 
     @Test
     public void testFindAll(){
@@ -37,7 +36,7 @@ public class ThresholdControllerTest {
 
     @Test
     public void testFindById(){
-        Threshold xylenes = TestData.xylenes();
+        WasteThreshold xylenes = TestData.xylenes();
 
         when( repository.findById( xylenes.getId() )).thenReturn( Optional.of( xylenes ));
         assertThat( controller.findById(xylenes.getId() )).isEqualTo( Optional.of( xylenes ));

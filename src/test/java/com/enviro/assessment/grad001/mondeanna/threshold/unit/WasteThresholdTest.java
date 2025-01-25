@@ -1,7 +1,7 @@
-package com.enviro.assessment.grad001.mondeanna.waste.unit;
+package com.enviro.assessment.grad001.mondeanna.threshold.unit;
 
-import com.enviro.assessment.grad001.mondeanna.waste.TestData;
-import com.enviro.assessment.grad001.mondeanna.waste.Threshold;
+import com.enviro.assessment.grad001.mondeanna.threshold.TestData;
+import com.enviro.assessment.grad001.mondeanna.threshold.WasteThreshold;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class ThresholdTest {
+public class WasteThresholdTest {
 
     @Test
     void testInstanceConstruction(){
-        Threshold zinc = TestData.zinc();
+        WasteThreshold zinc = TestData.zinc();
 
         assertThat( zinc.getSubstance() ).isEqualTo( "Zinc" );
         assertThat( zinc.getFormula() ).isEqualTo( "Zn" );
