@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table( name = "thresholds" )
+@Table( name = "waste_thresholds" )
 public class WasteThreshold {
 
         @Id

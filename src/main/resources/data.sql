@@ -1,4 +1,4 @@
-INSERT INTO thresholds (
+INSERT INTO waste_thresholds (
                     substance, formula,
                     total_concentration_threshold_zero,
                     total_concentration_threshold_one,
