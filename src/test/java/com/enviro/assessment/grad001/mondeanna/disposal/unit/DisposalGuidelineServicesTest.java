@@ -56,6 +56,8 @@ public class DisposalGuidelineServicesTest {
         updated.setWasteCategory( "updated waste category" );
         updated.setLandfill( "updated landfill" );
 
+        assertThat( guideline ).isNotEqualTo( updated );
+
         Mockito.when( repository.existsById( 2L )).thenReturn( true );
         Mockito.when( repository.save( guideline )).thenReturn( updated );
         assertThat( service.update( 2L, guideline )).isEqualTo( Optional.of( updated ));

@@ -67,6 +67,8 @@ public class DisposalGuidelineControllerTest {
         updated.setDescription( "updated description" );
         updated.setLandfill( "updated landfill" );
 
+        assertThat( guideline ).isNotEqualTo( updated );
+
         Mockito.when( services.update( 2L, guideline )).thenReturn( Optional.of( updated ));
         assertThat( controller.update( 2L, guideline )).isEqualTo( ResponseEntity.ok( updated ));
     }
