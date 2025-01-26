@@ -20,7 +20,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @SpringBootTest
 public class RecyclingTipTest {
 
-    private final String validationMessage = "must not be blank";
+    private final List<String> validationMessages = List.of( "must not be blank" );
     private RecyclingTip tip;
     private Validator validator;
 
@@ -45,6 +45,17 @@ public class RecyclingTipTest {
 
         Set<ConstraintViolation<RecyclingTip>> violations = validator.validate( tip );
         List<String> messages = violations.stream().map( ConstraintViolation::getMessage ).toList();
-        assertThat( messages.contains( validationMessage )).isTrue();
+
+        assertThat( messages ).isEqualTo( validationMessages );
+    }
+
+    @Test
+    public void testInvalidDescription(){
+        tip = TestData.invalidDescription();
+
+        Set<ConstraintViolation<RecyclingTip>> violations = validator.validate( tip );
+        List<String> messages = violations.stream().map( ConstraintViolation::getMessage ).toList();
+
+        assertThat( messages ).isEqualTo( List.of( "must not be blank" ));
     }
 }
