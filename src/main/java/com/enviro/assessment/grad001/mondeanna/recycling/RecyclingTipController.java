@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping( path = "/api/v1/recycling-tips" )
+@RequestMapping( path = "/api/v1/recycling/tips" )
 public class RecyclingTipController {
 
     private final RecyclingTipServices services;

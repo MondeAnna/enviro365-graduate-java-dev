@@ -24,7 +24,6 @@ import static org.mockito.ArgumentMatchers.anyLong;
 @SpringBootTest
 public class RecyclingTipControllerTest {
 
-    /* temporarily unused
     @Mock
     private RecyclingTipServices services;
 
@@ -32,11 +31,11 @@ public class RecyclingTipControllerTest {
     private RecyclingTipController controller;
 
     private final List<RecyclingTip> mockRepo = TestData.mockRecyclingTipRepo();
-    private final RecyclingTip guideline = TestData.validTip();
+    private final RecyclingTip guideline = TestData.validExample();
 
     @Test
     public void testSave(){
-        URI uri = URI.create( "/api/v1/recycling-tips/1" );
+        URI uri = URI.create( "/api/v1/recycling/tips/1" );
         ResponseEntity<URI> expected =  ResponseEntity.created( uri ).build();
 
         Mockito.when( services.save( guideline )).thenReturn( guideline );
@@ -63,12 +62,10 @@ public class RecyclingTipControllerTest {
 
     @Test
     public void testUpdate(){
-        RecyclingTip updated = TestData.validTip();
+        RecyclingTip updated = TestData.validExample();
 
-        updated.setClassification( "updated classification" );
-        updated.setWasteCategory( "updated waste category" );
+        updated.setTip( "updated tip" );
         updated.setDescription( "updated description" );
-        updated.setLandfill( "updated landfill" );
 
         assertThat( guideline ).isNotEqualTo( updated );
 
@@ -97,5 +94,4 @@ public class RecyclingTipControllerTest {
         Mockito.when( services.delete( 20L )).thenReturn( true );
         assertThat( controller.delete( 20L )).isEqualTo( expected );
     }
-    */
 }
