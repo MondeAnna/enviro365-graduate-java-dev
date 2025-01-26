@@ -142,3 +142,19 @@ VALUES
     ( 'A', 'general waste, excluding domestic waste, containing hazardous substances', 'High risk waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'Hh/hh' ),
     ( 'A', 'mixed hazardous substances from analytics laboratories and academic institution libraries in containers less than 100 litres', 'High risk waste as defined in the document Minimum Requirements for Waste Disposal by Landfill (2nd Ed., DWAF, 1998)', 'Hh/hh' )
 ;
+
+INSERT INTO recycling_tips ( tip, description )
+VALUES  ( 'Sort Your Rubbish', 'Be sure to sort your waste into paper, glass, plastic, metal and biodegradable food waste.' ),
+        ( 'Assist With Transportation', 'There are numerous drop-off facilities that exist that you can drive your recyclables to. Use different bins to store your recyclables in until you are ready to make a mass drop-off.' ),
+        ( 'Clean Recyclables', 'Before your materials into different bags be sure to rinse off any leftover food or waste to clean it off.' ),
+        ( 'Recycle Plastic', 'Plastic is made from oil, a non-renewable resource, which is why it is so important to recycle plastic.' ),
+        ( 'Compost Food Waste', 'Saved vegetable and fruit peels can be used to create homemade compost for use in food gardens or flowers and shrubs.' ),
+        ( 'Reuse Water', 'Water from baths, showers and such may be reused to water gardens, flowers and shrubs.' ),
+        ( 'Donate Unused Goods', 'Pack unused items and donate them to a local charity or secondhand store. This reduces the waste in landfills, lessen the unnecessary production of products and also free up some space in your cupboards.' ),
+        ( 'Discarding Glass', 'Do not put drinking glasses, cups or dishware in the recycling bin. This causes issues for the processors. If you have dishware and drinking glasses that are intact, donate them. If they are broken, put them in the trash and send them to the landfill.' ),
+        ( 'Compostable Plastics', 'Compostable plastics are only compostable in industrial or commercial compost processing facilities and have specifically marked bins marked. When purchasing, ensure products are marked as "compostable" and ideally display the BPI certified logo.' ),
+        ( 'Batteries', 'Take used batteries to a recycling facility or store that recycles batteries.' ),
+        ( 'Electronics', 'Take electronics to a SERI certified electronics recycling facility.' ),
+        ( 'Bring Your Own', 'This is a sustainable hack whereby one brings and uses ones own re-usable items.' ),
+        ( 'Buy Recycled', 'Supporting recycling means feeding this loop by not only recycling, but also supporting recycled products.' )
+;
