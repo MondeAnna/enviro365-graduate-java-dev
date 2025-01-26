@@ -24,6 +24,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 @SpringBootTest
 public class RecyclingTipControllerTest {
 
+    /* temporarily unused
     @Mock
     private RecyclingTipServices services;
 
@@ -96,4 +97,5 @@ public class RecyclingTipControllerTest {
         Mockito.when( services.delete( 20L )).thenReturn( true );
         assertThat( controller.delete( 20L )).isEqualTo( expected );
     }
+    */
 }

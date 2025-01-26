@@ -24,16 +24,9 @@ public class RecyclingTip {
         private Long id;
 
         @NotBlank
-        @Pattern( regexp = "[A-D]", message = "Allowed: 'A', 'B', 'C' or 'D'" )
-        private String classification;
-
-        @NotBlank
         @Column( unique = true )
-        private String wasteCategory;
+        private String tip;
 
         @NotBlank
         private String description;
-
-        @NotBlank
-        private String landfill;
 }

@@ -4,53 +4,29 @@ import java.util.List;
 
 public class TestData {
 
-    public static RecyclingTip validTip(){
+    public static RecyclingTip validExample(){
         return RecyclingTip.builder()
                 .id( 1L )
-                .classification( "A" )
-                .description( "a long description" )
-                .wasteCategory( "waste category" )
-                .landfill( "landfill shorthand" )
+                .tip( "Check Water Sources" )
+                .description( "Do not let taps, showers and hose pipes run unattended" )
                 .build();
     }
 
-    public static RecyclingTip blankClassification() {
+    public static RecyclingTip invalidTip() {
         return RecyclingTip.builder()
-                .classification( "" )
+                .tip( "" )
                 .description( "description" )
-                .wasteCategory( "waste category" )
-                .landfill( "landfill shorthand" )
                 .build();
     }
 
-    public static RecyclingTip blankWasteCategory() {
+    public static RecyclingTip invalidDescription() {
         return RecyclingTip.builder()
-                .classification( "B" )
-                .description( "description" )
-                .wasteCategory( "" )
-                .landfill( "landfill shorthand" )
-                .build();
-    }
-
-    public static RecyclingTip blankDescription() {
-        return RecyclingTip.builder()
-                .classification( "C" )
+                .tip( "tip" )
                 .description( "" )
-                .wasteCategory( "category" )
-                .landfill( "landfill shorthand" )
-                .build();
-    }
-
-    public static RecyclingTip blankLandfill() {
-        return RecyclingTip.builder()
-                .classification( "D" )
-                .description( "description" )
-                .wasteCategory( "category" )
-                .landfill( "" )
                 .build();
     }
 
     public static List<RecyclingTip> mockRecyclingTipRepo(){
-        return List.of( validTip() );
+        return List.of( validExample() );
     }
 }
