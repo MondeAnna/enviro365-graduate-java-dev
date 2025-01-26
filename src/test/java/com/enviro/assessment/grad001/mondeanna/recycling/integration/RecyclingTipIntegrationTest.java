@@ -85,10 +85,10 @@ public class RecyclingTipIntegrationTest {
                 .andReturn().getResponse();
 
         RecyclingTip category = deserializeRecyclingTip( response );
-        String expectedDescription = "Be sure to sort your waste";
+        String expectedDescription = "refusing to use non-recyclable products";
 
         /* be aware that the test touches the actual database */
-        assertThat( category.getTip() ).isEqualTo( "Sort Your Rubbish" );
+        assertThat( category.getTip() ).isEqualTo( "Refuse" );
         assertThat( category.getDescription() ).contains( expectedDescription );
     }
 
@@ -117,11 +117,11 @@ public class RecyclingTipIntegrationTest {
         long id = category.getId();
 
         assertThat( category.getId() ).isEqualTo( 1 );
-        assertThat( category.getTip() ).isEqualTo( "Sort Your Rubbish" );
+        assertThat( category.getTip() ).isEqualTo( "Refuse" );
 
         String json = "{'tip': 'updated tip', 'description': 'updated description'}";
 
-        MockHttpServletResponse response = mockMvc.perform( put( requestMapping + "/" + id )
+        MockHttpServletResponse response = mockMvc.perform( put( requestMapping + "/1" + id )
                         .accept( MediaType.APPLICATION_JSON )
                         .contentType( MediaType.APPLICATION_JSON )
                         .content( json ))
