@@ -35,7 +35,7 @@ public class RecyclingTipControllerTest {
 
     @Test
     public void testSave(){
-        URI uri = URI.create( "/api/v1/recycling/tips/1" );
+        URI uri = URI.create( "/api/v1/recycling-tips/1" );
         ResponseEntity<URI> expected =  ResponseEntity.created( uri ).build();
 
         Mockito.when( services.save( guideline )).thenReturn( guideline );

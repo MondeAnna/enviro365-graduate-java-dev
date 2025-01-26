@@ -31,7 +31,7 @@ import java.util.List;
 public class RecyclingTipIntegrationTest {
 
     private final String json = "{'tip': 'Compost Waste', 'description': 'Create own composite'}";
-    private final String requestMapping = "/api/v1/recycling/tips";
+    private final String requestMapping = "/api/v1/recycling-tips";
 
     @Autowired
     private MockMvc mockMvc;
