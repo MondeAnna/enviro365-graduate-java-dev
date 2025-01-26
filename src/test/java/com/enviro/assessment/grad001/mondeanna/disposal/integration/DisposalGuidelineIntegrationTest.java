@@ -29,22 +29,20 @@ import java.util.List;
 @AutoConfigureMockMvc
 @SpringBootTest( webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT )
 @DirtiesContext( classMode = ClassMode.BEFORE_EACH_TEST_METHOD )
-public class WasteControllerIntegrationTest {
+public class DisposalGuidelineIntegrationTest {
 
-    /* temporarily unused
+    private final String json = "{'classification': 'A', 'wasteguideline': 'Type 1', 'description': 'description', 'landfill': 'Hh/HH'}";
+    private final String requestMapping = "/api/v1/disposal-guidelines";
+
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    private final String requestMapping = "/api/v1/waste-categories";
-
     @Test
     @Disabled( "response is status code 400 instead of 201" )
     public void testIntegrationOfSaveUsingJson() throws Exception {
-        String json = "{'name': 'Type 10', 'description': 'fancy test description'}";
-
         MockHttpServletResponse response = mockMvc.perform( post( requestMapping + "/" )
                         .accept( MediaType.APPLICATION_JSON )
                         .contentType( MediaType.APPLICATION_JSON )
@@ -55,53 +53,52 @@ public class WasteControllerIntegrationTest {
         assertThat( response.getContentAsString() ).contains( "id" );
         assertThat( response.getContentAsString() ).contains( json );
 
-        DisposalGuideline typeTen = deserializeDisposalGuideline( response );
+        DisposalGuideline guideline = deserializeDisposalGuideline( response );
 
         assertThat( response.getStatus() ).isEqualTo( HttpStatus.CREATED.value() );
-        assertThat( typeTen.getName() ).isEqualTo( "Type 10" );
-        assertThat( typeTen.getDescription() ).isEqualTo( "fancy test description" );
+        assertThat( guideline.getClassification() ).isEqualTo( "A" );
+        assertThat( guideline.getWasteCategory() ).isEqualTo( "Type 1" );
+        assertThat( guideline.getDescription() ).isEqualTo( "description" );
+        assertThat( guideline.getLandfill() ).isEqualTo( "Hh/HH" );
     }
 
     @Test
     public void testIntegrationOfSaveWithInvalidArgs() throws Exception {
-        String json = "{'id': 10, 'name': 'Type 10', 'description': 'description'}";
-
         mockMvc.perform( post( requestMapping + "/" )
                         .accept( MediaType.APPLICATION_JSON )
                         .contentType( MediaType.APPLICATION_JSON )
                         .content( json ))
-                .andExpect( status().isBadRequest() )
-                .andReturn().getResponse();
+                .andExpect( status().isBadRequest() );
     }
 
     @Test
-    @Disabled
     public void testIntegrationOfFindAll() throws Exception {
         MockHttpServletResponse response = mockMvc.perform( get( requestMapping + "/" ))
                 .andExpect( status().isOk() )
                 .andReturn().getResponse();
 
         List<DisposalGuideline> responseRepository = deserializeRepository( response );
-        String expectedDescription = "(LCT1 < LC <= LCT2 or TC <= TCT1)";
 
         assertThat( responseRepository.get( 0 ).getId() ).isEqualTo( 1 );
-        assertThat( responseRepository.get( 1 ).getName() ).isEqualTo( "Type 1" );
-        assertThat( responseRepository.get( 2 ).getDescription() ).contains( expectedDescription );
+        assertThat( responseRepository.get( 1 ).getClassification() ).isEqualTo( "B" );
+        assertThat( responseRepository.get( 2 ).getWasteCategory() ).isEqualTo( "Type 3" );
+        assertThat( responseRepository.get( 3 ).getDescription() ).contains( "Inert waste" );
+        assertThat( responseRepository.get( 3 ).getLandfill() ).isEqualTo( "GLB-" );
     }
 
     @Test
-    @Disabled
     public void testIntegrationOfFindById() throws Exception {
-        MockHttpServletResponse response = mockMvc.perform( get( requestMapping + "/4" ))
+        MockHttpServletResponse response = mockMvc.perform( get( requestMapping + "/3" ))
                 .andExpect( status().isOk() )
                 .andReturn().getResponse();
 
-        DisposalGuideline category = deserializeDisposalGuideline( response );
-        String expectedDescription = "(LCT0 < LC <= LCT1 or TC <= TCT1)";
+        DisposalGuideline guideline = deserializeDisposalGuideline( response );
 
-        assertThat( category.getId() ).isEqualTo( 4 );
-        assertThat( category.getName() ).isEqualTo( "Type 3");
-        assertThat( category.getDescription() ).contains( expectedDescription );
+        assertThat( guideline.getId() ).isEqualTo( 3 );
+        assertThat( guideline.getClassification() ).isEqualTo( "C" );
+        assertThat( guideline.getWasteCategory() ).isEqualTo( "Type 3" );
+        assertThat( guideline.getDescription() ).contains( "Low risk waste" );
+        assertThat( guideline.getLandfill() ).isEqualTo( "GLB+" );
     }
 
     @Test
@@ -125,13 +122,16 @@ public class WasteControllerIntegrationTest {
                 .andExpect( status().isOk() )
                 .andReturn().getResponse();
 
-        DisposalGuideline category = deserializeRepository( findAllResponse ).get( 0 );
-        long id = category.getId();
+        DisposalGuideline guideline = deserializeRepository( findAllResponse ).get( 0 );
+        long id = guideline.getId();
 
-        assertThat( category.getId() ).isEqualTo( id );
-        assertThat( category.getName() ).isEqualTo( "Type 0" );
+        assertThat( guideline.getId() ).isEqualTo( 1 );
+        assertThat( guideline.getClassification() ).isEqualTo( "A" );
+        assertThat( guideline.getWasteCategory() ).isEqualTo( "Type 1" );
+        assertThat( guideline.getDescription() ).contains( "High risk waste" );
+        assertThat( guideline.getLandfill() ).isEqualTo( "Hh/HH" );
 
-        String json = "{'name': 'Type 10', 'description': 'updated description'}";
+        String json = "{'classification': 'D', 'wasteguideline': 'Type 4', 'description': 'description', 'landfill': 'GLB-'}";
 
         MockHttpServletResponse response = mockMvc.perform( put( requestMapping + "/" + id )
                         .accept( MediaType.APPLICATION_JSON )
@@ -143,10 +143,13 @@ public class WasteControllerIntegrationTest {
         assertThat( response.getContentAsString() ).contains( "'id': 1" );
         assertThat( response.getContentAsString() ).contains( json );
 
-        DisposalGuideline typeTen = deserializeDisposalGuideline( response );
+        guideline = deserializeDisposalGuideline( response );
 
-        assertThat( typeTen.getName() ).isEqualTo( "Type 10" );
-        assertThat( typeTen.getDescription() ).isEqualTo( "fancy test description" );
+        assertThat( guideline.getId() ).isEqualTo( 1 );
+        assertThat( guideline.getClassification() ).isEqualTo( "D" );
+        assertThat( guideline.getWasteCategory() ).isEqualTo( "Type 4" );
+        assertThat( guideline.getDescription() ).contains( "descrition" );
+        assertThat( guideline.getLandfill() ).isEqualTo( "GLB-" );
     }
 
     @Test
@@ -157,8 +160,6 @@ public class WasteControllerIntegrationTest {
 
         List<DisposalGuideline> responseRepository = deserializeRepository( response );
         int invalidId = responseRepository.size() + 1;
-
-        String json = "{'name': 'Type 10', 'description': 'updated description'}";
 
         mockMvc.perform( put( requestMapping + "/" + invalidId )
                         .accept( MediaType.APPLICATION_JSON )
@@ -216,5 +217,4 @@ public class WasteControllerIntegrationTest {
             throws UnsupportedEncodingException, JsonProcessingException {
         return objectMapper.readValue( response.getContentAsString(), DisposalGuideline.class );
     }
-    */
 }
