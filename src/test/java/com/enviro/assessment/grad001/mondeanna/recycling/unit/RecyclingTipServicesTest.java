@@ -21,7 +21,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @SpringBootTest
 public class RecyclingTipServicesTest {
 
-    /* temporarily unused
     @Mock
     private RecyclingTipRepository repository;
 
@@ -29,7 +28,7 @@ public class RecyclingTipServicesTest {
     private RecyclingTipServices service;
 
     private final List<RecyclingTip> mockRepo = TestData.mockRecyclingTipRepo();
-    private final RecyclingTip guideline = TestData.validTip();
+    private final RecyclingTip tip = TestData.validExample();
 
     @Test
     public void testFindAll(){
@@ -39,36 +38,34 @@ public class RecyclingTipServicesTest {
 
     @Test
     public void testFindById(){
-        Mockito.when( repository.findById( 2L )).thenReturn( Optional.of( guideline ));
-        assertThat( service.findById( 2L )).isEqualTo( Optional.of( guideline ));
+        Mockito.when( repository.findById( 2L )).thenReturn( Optional.of( tip ));
+        assertThat( service.findById( 2L )).isEqualTo( Optional.of( tip ));
     }
 
     @Test
     public void testSave(){
-        Mockito.when( repository.save( guideline )).thenReturn( guideline );
-        assertThat( service.save( guideline )).isEqualTo( guideline );
+        Mockito.when( repository.save( tip )).thenReturn( tip );
+        assertThat( service.save( tip )).isEqualTo( tip );
     }
 
     @Test
     public void testUpdate(){
-        RecyclingTip updated = TestData.validTip();
+        RecyclingTip updated = TestData.validExample();
 
-        updated.setClassification( "updated classification" );
+        updated.setTip( "updated tip" );
         updated.setDescription( "updated description" );
-        updated.setWasteCategory( "updated waste category" );
-        updated.setLandfill( "updated landfill" );
 
-        assertThat( guideline ).isNotEqualTo( updated );
+        assertThat( tip ).isNotEqualTo( updated );
 
         Mockito.when( repository.existsById( 2L )).thenReturn( true );
-        Mockito.when( repository.save( guideline )).thenReturn( updated );
-        assertThat( service.update( 2L, guideline )).isEqualTo( Optional.of( updated ));
+        Mockito.when( repository.save( tip )).thenReturn( updated );
+        assertThat( service.update( 2L, tip )).isEqualTo( Optional.of( updated ));
     }
 
     @Test
     public void testUpdateWithInvalidArgs(){
         Mockito.when( repository.existsById( 200L )).thenReturn( false );
-        assertThat( service.update( 200L, guideline )).isEqualTo( Optional.empty() );
+        assertThat( service.update( 200L, tip )).isEqualTo( Optional.empty() );
     }
 
     @Test
@@ -82,5 +79,4 @@ public class RecyclingTipServicesTest {
         Mockito.when( repository.existsById( 1000L )).thenReturn( false );
         assertThat( service.delete( 1000L )).isEqualTo( false );
     }
-    */
 }
