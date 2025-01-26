@@ -37,13 +37,12 @@ public class WasteControllerIntegrationTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    private final String json = "{'name': 'Type 10', 'description': 'fancy test description'}";
     private final String requestMapping = "/api/v1/waste-categories";
 
     @Test
     @Disabled( "response is status code 400 instead of 201" )
     public void testIntegrationOfSaveUsingJson() throws Exception {
-        String json = "{'name': 'Type 10', 'description': 'fancy test description'}";
-
         MockHttpServletResponse response = mockMvc.perform( post( requestMapping + "/" )
                         .accept( MediaType.APPLICATION_JSON )
                         .contentType( MediaType.APPLICATION_JSON )
@@ -63,8 +62,6 @@ public class WasteControllerIntegrationTest {
 
     @Test
     public void testIntegrationOfSaveWithInvalidArgs() throws Exception {
-        String json = "{'id': 10, 'name': 'Type 10', 'description': 'description'}";
-
         mockMvc.perform( post( requestMapping + "/" )
                         .accept( MediaType.APPLICATION_JSON )
                         .contentType( MediaType.APPLICATION_JSON )
@@ -74,7 +71,6 @@ public class WasteControllerIntegrationTest {
     }
 
     @Test
-    @Disabled
     public void testIntegrationOfFindAll() throws Exception {
         MockHttpServletResponse response = mockMvc.perform( get( requestMapping + "/" ))
                 .andExpect( status().isOk() )
@@ -89,7 +85,6 @@ public class WasteControllerIntegrationTest {
     }
 
     @Test
-    @Disabled
     public void testIntegrationOfFindById() throws Exception {
         MockHttpServletResponse response = mockMvc.perform( get( requestMapping + "/4" ))
                 .andExpect( status().isOk() )
