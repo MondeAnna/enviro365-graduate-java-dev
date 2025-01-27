@@ -1,6 +1,12 @@
 # Enviro365 Graduate Software Developer Assessment
 
-## Background:
+<br />
+
+## Scenario
+
+<br />
+
+#### Background:
 
 Enviro365, a leading environmental solutions company, is developing a waste sorting
 mobile application aimed at promoting sustainable waste management practices. The
@@ -12,96 +18,7 @@ application.
 
 <br />
 
-## API
-
-#### Waste Categories
-
-POST (a.k.a. Create)
-
-```
-/api/v1/waste-categories/
-```
-
-GET (a.k.a. Read)
-
-```
-/api/v1/waste-categories/
-/api/v1/waste-categories/{id}
-```
-
-PUT (a.k.a. Update)
-
-```
-/api/v1/waste-categories/{id}
-```
-
-DELETE
-
-```
-/api/v1/waste-categories/{id}
-```
-
-<br />
-
-#### Disposal Guidelines
-
-POST (a.k.a. Create)
-
-```
-/api/v1/disposal-guidelines/
-```
-
-GET (a.k.a. Read)
-
-```
-/api/v1/disposal-guidelines/
-/api/v1/disposal-guidelines/{id}
-```
-
-PUT (a.k.a. Update)
-
-```
-/api/v1/disposal-guidelines/{id}
-```
-
-DELETE
-
-```
-/api/v1/disposal-guidelines/{id}
-```
-
-<br />
-
-#### Recycling Tips
-
-POST (a.k.a. Create)
-
-```
-/api/v1/recycling-tips/
-```
-
-GET (a.k.a. Read)
-
-```
-/api/v1/recycling-tips/
-/api/v1/recycling-tips/{id}
-```
-
-PUT (a.k.a. Update)
-
-```
-/api/v1/recycling-tips/{id}
-```
-
-DELETE
-
-```
-/api/v1/recycling-tips/{id}
-```
-
-<br />
-
-## Scenario:
+#### Scenario:
 
 You are part of a dedicated team working on the development of the waste sorting mobile
 application at Enviro365. Your team is passionate about environmental sustainability and is
@@ -114,6 +31,8 @@ facilitate data exchange between the frontend mobile application and the backend
 <br />
 
 ## Task
+
+<br />
 
 #### Build an exposed REST API with Spring Boot Application
 
@@ -139,6 +58,8 @@ integrity and validity of incoming requests and data payloads.
 <br />
 
 ## Resources
+
+<br />
 
 - [Waste Classification & Management Regulations Norms & Standards for Assessment and Disposal of Waste to Landfill](https://sawic.environment.gov.za/documents/2177.pdf)
   - Published 2013
