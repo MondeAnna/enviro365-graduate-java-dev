@@ -26,7 +26,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-@Disabled( "In ability to write to db makes these unsafe" )
+@Disabled( "In ability to POST or PUT in the tests makes these unsafe" )
 @AutoConfigureMockMvc
 @SpringBootTest( webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT )
 @DirtiesContext( classMode = ClassMode.BEFORE_EACH_TEST_METHOD )
